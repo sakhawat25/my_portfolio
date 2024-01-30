@@ -40,34 +40,16 @@
 
                 <!-- charts -->
                 <div class="grid grid-cols-2 gap-6 h-full">
-                    <div class="card">
-                        <div class="py-3 px-4 flex flex-row justify-between">
-                            <h1 class="h6">
-                                <span class="num-4"></span>k
-                                <p>page view</p>
-                            </h1>
-
-                            <div
-                                class="bg-teal-200 text-teal-700 border-teal-300 border w-10 h-10 rounded-full flex justify-center items-center">
-                                <i class="fad fa-eye"></i>
-                            </div>
-                        </div>
-                        <div class="analytics_1"></div>
+                    <div class="card border-1 border-teal-400 flex flex-col justify-between">
+                        <div></div>
+                        <h1 class="text-center h1">005</h1>
+                        <div class="bg-teal-400 py-3 text-center text-white text-l">SKILLS</div>
                     </div>
 
-                    <div class="card">
-                        <div class="py-3 px-4 flex flex-row justify-between">
-                            <h1 class="h6">
-                                <span class="num-2"></span>k
-                                <p>Unique Users</p>
-                            </h1>
-
-                            <div
-                                class="bg-indigo-200 text-indigo-700 border-indigo-300 border w-10 h-10 rounded-full flex justify-center items-center">
-                                <i class="fad fa-users-crown"></i>
-                            </div>
-                        </div>
-                        <div class="analytics_1"></div>
+                    <div class="card border-1 border-teal-400 flex flex-col justify-between">
+                        <div></div>
+                        <h1 class="text-center h1">005</h1>
+                        <div class="bg-teal-400 py-3 text-center text-white text-l">PROJECTS</div>
                     </div>
                 </div>
                 <!-- charts    -->
