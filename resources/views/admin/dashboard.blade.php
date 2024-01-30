@@ -22,7 +22,7 @@
                     <!-- info -->
                     <div class="py-2 ml-10">
                         <h1 class="h6">Sakhawat Hussain</h1>
-                        <p class="text-white text-xs" >
+                        <p class="text-white text-xs">
                             <span id="title" data-typed-items="Laravel Developer, Backend Developer"></span>
                         </p>
 
@@ -35,26 +35,25 @@
             </div>
             <!-- end update section -->
 
-            <!-- carts -->
             <div class="flex flex-col">
-
-                <!-- charts -->
                 <div class="grid grid-cols-2 gap-6 h-full">
-                    <div class="card border-1 border-teal-400 flex flex-col justify-between">
-                        <div></div>
-                        <h1 class="text-center h1">005</h1>
-                        <div class="bg-teal-400 py-3 text-center text-white text-l">SKILLS</div>
+                    <div class="card flex flex-col justify-center items-center">
+                        <div class="h4 text-indigo-700 flex items-center justify-center size-14">
+                            <i class="fad fa-code"></i>
+                        </div>
+                        <h5 class="mt-4 mb-2"><span class="counter-value" data-target="236.18">05</span></h5>
+                        <p class="text-slate-500 dark:text-zink-200">Skills</p>
                     </div>
 
-                    <div class="card border-1 border-teal-400 flex flex-col justify-between">
-                        <div></div>
-                        <h1 class="text-center h1">005</h1>
-                        <div class="bg-teal-400 py-3 text-center text-white text-l">PROJECTS</div>
+                    <div class="card flex flex-col justify-center items-center">
+                        <div class="h4 text-red-700 flex items-center justify-center size-14">
+                            <i class="fad fa-sitemap"></i>
+                        </div>
+                        <h5 class="mt-4 mb-2"><span class="counter-value" data-target="236.18">05</span></h5>
+                        <p class="text-slate-500 dark:text-zink-200">Projects</p>
                     </div>
                 </div>
-                <!-- charts    -->
             </div>
-            <!-- end charts -->
         </div>
         <!-- end Analytics -->
 
@@ -460,5 +459,5 @@
         <!-- end quick Info -->
     </div>
     <!-- end content -->
-</div>
+    </div>
 @endsection
