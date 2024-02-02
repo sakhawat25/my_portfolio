@@ -1,63 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full bg-white">
 
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
 </head>
 
-<body>
-    <div class="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-            <div
-                class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl">
-            </div>
-            <div class="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+<body class="h-full">
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                alt="Your Company">
+            <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your
+                account</h2>
+        </div>
 
-                <div class="max-w-md mx-auto">
-                    <div>
-                        <h1 class="text-2xl font-semibold">Login</h1>
+        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form class="space-y-6" method="POST" action="{{ url('login') }}">
+                @csrf
+                <div>
+                    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email
+                        address</label>
+                    <div class="mt-2">
+                        <input id="email" name="email" type="email" autocomplete="email"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                     </div>
-                    <form method="POST" action="{{ url('login') }}">
-                        @csrf
-                        <div class="divide-y divide-gray-200">
-                            <div class="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                                <div class="relative">
-                                    <input autocomplete="off" id="email" name="email" type="text"
-                                        class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        placeholder="Email address" />
-                                    @error('email')
-                                        <p class="text-sm text-red-500">{{ $message }}</p>
-                                    @enderror
-                                    <label for="email"
-                                        class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Email
-                                        Address</label>
-                                </div>
-                                <div class="relative">
-                                    <input autocomplete="off" id="password" name="password" type="password"
-                                        class="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                        placeholder="Password" />
-                                    @error('password')
-                                        <p class="text-sm text-red-500">{{ $message }}</p>
-                                    @enderror
-                                    <label for="password"
-                                        class="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
-                                </div>
-                                <div class="relative">
-                                    <button class="bg-cyan-500 text-white rounded-md px-2 py-1">Submit</button>
-                                </div>
-                            </div>
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between">
+                        <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                        <div class="text-sm">
+                            <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot
+                                password?</a>
                         </div>
-                    </form>
+                    </div>
+                    <div class="mt-2">
+                        <input id="password" name="password" type="password" autocomplete="current-password"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                    </div>
                 </div>
 
-                <div class="w-full flex justify-center">
-                    <a href="#"
-                        class="flex items-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-                        <span>Forgot Password?</span>
-                    </a>
+                <div>
+                    <button type="submit"
+                        class="flex w-full justify-center rounded-md bg-[#603140] px-3 py-1.5 text-lg font-bold leading-6 text-white shadow-sm hover:bg-[#82475A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign
+                        in</button>
                 </div>
-
-            </div>
+            </form>
         </div>
     </div>
 </body>
