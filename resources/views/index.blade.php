@@ -13,6 +13,8 @@
     <title>Erling</title>
 
     <!-- STYLES -->
+    @vite('resources/css/app.css')
+
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;family=Syne:wght@400;500;600;700;800&amp;display=swap"
         rel="stylesheet">
@@ -86,8 +88,8 @@
             class="erling_tm_sidebar_menu w-[400px] left-0 top-0 bottom-0 fixed bg-white flex items-center large:w-[300px] middle:hidden">
             <div class="sidebar_inner w-full py-0 px-[70px]">
                 <div class="logo mb-[60px]">
-                    <a href="#"><img class="max-w-[140px] max-h-[100px]" src="assets/img/logo/logo.png"
-                            alt="" /></a>
+                    <a href="#"><img class="max-w-[140px] max-h-[100px]"
+                            src="{{ asset('assets/admin/img/logo02.png') }}" alt="" /></a>
                 </div>
                 <div class="menu mb-[55px]">
                     <ul class="anchor_nav">
@@ -135,14 +137,15 @@
                         <div class="content w-full h-[100vh] relative flex items-center">
                             <div class="details flex items-center">
                                 <div class="image relative w-[450px] h-[450px]">
-                                    <div class="main absolute inset-0 bg-no-repeat bg-center bg-cover"
-                                        data-img-url="assets/img/about/1.jpg"></div>
+                                    <div class="rounded-full main absolute inset-0 bg-no-repeat bg-center bg-cover"
+                                        data-img-url="{{ asset('images/profile_pic01.jpg') }}"></div>
                                 </div>
                                 <div class="text pl-[70px]">
                                     <h3
                                         class="stroke text-[130px] font-extrabold leading-[1.1] uppercase font-archivo">
-                                        Erling</h3>
-                                    <h3 class="text-[130px] font-extrabold leading-[1.1] uppercase font-archivo">Walton
+                                        Sakhawat</h3>
+                                    <h3 class="text-[130px] font-extrabold leading-[1.1] uppercase font-archivo">
+                                        Hussain
                                     </h3>
                                     <div class="job inline-block bg-[#f5f5f5] py-[15px] px-[40px] mt-[30px]">
                                         <span>UI Designer</span><span>Web Developer</span><span>SEO Optimizer</span>
@@ -1215,7 +1218,7 @@
 
     <!-- SCRIPTS -->
     <script data-cfasync="false" src="{{ asset('assets/js/email-decode.min.js') }} "></script>
-    <script src="assets/js/jquery.js"></script>
+    <script src="{{ asset('assets/js/jquery.js') }}"></script>
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/contact.form.js') }}"></script>
     <script src="{{ asset('assets/js/init.js') }}"></script>
