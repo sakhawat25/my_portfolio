@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WebHomeController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,6 @@ Route::get('login', function() {
 })->name('login');
 
 Route::middleware('auth')->prefix('admin')->group(function() {
-    Route::get('/', function() {
-        return view('admin.dashboard');
-    });
+    Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
 });

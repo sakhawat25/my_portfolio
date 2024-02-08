@@ -104,7 +104,8 @@
                         <hr />
 
                         <!-- item -->
-                        <form method="POST" action="{{ url('logout') }}" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
+                        <form method="POST" action="{{ url('logout') }}"
+                            class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
                             @csrf
                             <button type="submit"><i class="fad fa-power-off text-xs mr-1"></i> Log out</button>
                         </form>
@@ -260,7 +261,8 @@
                             href="#">
                             <div
                                 class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
-                                <img class="w-full h-full object-cover" src="{{ asset('assets/admin/img/user1.jpg') }}" alt="" />
+                                <img class="w-full h-full object-cover"
+                                    src="{{ asset('assets/admin/img/user1.jpg') }}" alt="" />
                             </div>
 
                             <div class="flex-1 flex flex-rowbg-green-100">
@@ -281,7 +283,8 @@
                             href="#">
                             <div
                                 class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
-                                <img class="w-full h-full object-cover" src="{{ asset('assets/admin/img/user2.jpg') }}" alt="" />
+                                <img class="w-full h-full object-cover"
+                                    src="{{ asset('assets/admin/img/user2.jpg') }}" alt="" />
                             </div>
 
                             <div class="flex-1 flex flex-rowbg-green-100">
@@ -302,7 +305,8 @@
                             href="#">
                             <div
                                 class="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-100 border border-gray-300">
-                                <img class="w-full h-full object-cover" src="{{ asset('assets/admin/img/user3.jpg') }}" alt="" />
+                                <img class="w-full h-full object-cover"
+                                    src="{{ asset('assets/admin/img/user3.jpg') }}" alt="" />
                             </div>
 
                             <div class="flex-1 flex flex-rowbg-green-100">
@@ -357,16 +361,16 @@
                 </p>
 
                 <!-- link -->
-                <a href="./index.html"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 active">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 @if (request()->route()->getName() === 'admin.dashboard') active @endif">
                     <i class="fad fa-chart-pie text-xs mr-2"></i>
                     Dashboard
                 </a>
                 <!-- end link -->
 
                 <!-- link -->
-                <a href="./email.html"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <a href="{{ route('admin.profile') }}"
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 @if (request()->route()->getName() === 'admin.profile') active @endif">
                     <i class="fad fa-envelope-open-text text-xs mr-2"></i>
                     Profile
                 </a>
@@ -392,7 +396,9 @@
         </div>
         <!-- end sidbar -->
 
-    @yield('content')
+        @yield('content')
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="{{ asset('assets/admin/js/scripts.js') }}"></script>

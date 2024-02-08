@@ -35,7 +35,8 @@
 
             <div class="flex flex-col">
                 <div class="grid grid-cols-2 gap-6 h-full">
-                    <div class="card flex justify-evenly items-center transition duration-500 ease-in-out shadow-lg transform hover:-translate-y-1 hover:scale-105">
+                    <div
+                        class="card flex justify-evenly items-center transition duration-500 ease-in-out shadow-lg transform hover:-translate-y-1 hover:scale-105">
                         <div class="h1 text-indigo-700 flex items-center justify-center size-14">
                             <i class="fad fa-code"></i>
                         </div>
@@ -45,7 +46,8 @@
                         </div>
                     </div>
 
-                    <div class="card flex justify-evenly items-center transition duration-500 ease-in-out shadow-lg transform hover:-translate-y-1 hover:scale-105">
+                    <div
+                        class="card flex justify-evenly items-center transition duration-500 ease-in-out shadow-lg transform hover:-translate-y-1 hover:scale-105">
                         <div class="h1 text-red-700 flex items-center justify-center size-14">
                             <i class="fad fa-sitemap"></i>
                         </div>
@@ -62,7 +64,7 @@
             <div class="flex justify-between card-header">
                 <span>Recent Activities</span>
                 <a href="#"
-                   class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                    class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                     view All
                 </a>
             </div>
@@ -85,7 +87,8 @@
                             Added one experience record
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
                         </td>
@@ -101,7 +104,8 @@
                             Added one experience record
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
                         </td>
@@ -117,7 +121,8 @@
                             Added one experience record
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
                         </td>
@@ -133,7 +138,8 @@
                             Added one experience record
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
                         </td>
@@ -149,7 +155,8 @@
                             Added one experience record
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
                         </td>
@@ -162,13 +169,13 @@
         </div>
 
         <div class="mt-6 card col-span-2 xl:col-span-1 shadow-lg">
-                <div class="flex justify-between card-header">
-                    <span>Recent Messages</span>
-                    <a href="#"
-                       class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
-                        view All
-                    </a>
-                </div>
+            <div class="flex justify-between card-header">
+                <span>Recent Messages</span>
+                <a href="#"
+                    class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                    view All
+                </a>
+            </div>
 
 
             <table class="table-auto w-full text-left">
@@ -197,10 +204,12 @@
                             <i class="fad fa-check"></i>
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 reply
                             </a>
                         </td>
@@ -222,10 +231,12 @@
                             <i class="fad fa-check"></i>
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 reply
                             </a>
                         </td>
@@ -247,10 +258,12 @@
                             <i class="fad fa-check"></i>
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 reply
                             </a>
                         </td>
@@ -272,10 +285,12 @@
                             <i class="fad fa-check"></i>
                         </td>
                         <td class="border border-l-0 px-4 py-2 text-center">
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 view
                             </a>
-                            <a href="#" class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
+                            <a href="#"
+                                class="bg-teal-400 hover:bg-teal-500 text-white text-sm font-semibold me-2 px-3 py-1 rounded inline-flex items-center justify-center">
                                 reply
                             </a>
                         </td>
@@ -286,6 +301,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
 @endsection
