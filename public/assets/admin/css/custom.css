@@ -3,3 +3,7 @@
     padding: 5px 10px;
     border-radius: 15px;
 }
+
+.tagify {
+    border: 1px solid #4fd1c5 !important;
+}

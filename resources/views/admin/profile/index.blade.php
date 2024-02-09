@@ -15,7 +15,7 @@
     <div class="bg-gray-100 flex-1 p-6 justify-center md:mt-20">
         <div class="grid grid-cols-2 gap-6 xl:grid-cols-1">
             <div
-                class="w-full px-3 py-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md">
                 <div class="flex flex-col items-center pb-10">
                     <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="{{ asset('images/profile_pic.png') }}"
                         alt="Bonnie image" />
@@ -196,11 +196,11 @@
             </div>
 
             <div
-                class="w-full px-3 py-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md">
 
                 <div class="flex flex-col py-2">
                     <label
-                        class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/3">
+                        class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
                         Titles
                     </label>
 
@@ -211,7 +211,7 @@
 
                 <div class="flex flex-col py-2">
                     <label
-                        class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/3">
+                        class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
                         Skills
                     </label>
 
