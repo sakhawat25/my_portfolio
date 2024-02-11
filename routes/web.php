@@ -18,11 +18,12 @@ use App\Http\Controllers\Admin\ProfileController;
 
 Route::get('/', [WebHomeController::class, 'index']);
 
-Route::get('login', function() {
+Route::get('login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::middleware('auth')->prefix('admin')->group(function() {
+Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
+    Route::patch('/profile/update/{field}', [ProfileController::class, 'updateField'])->name('admin.profile.updateField');
 });

@@ -7,3 +7,11 @@
 .tagify {
     border: 1px solid #4fd1c5 !important;
 }
+
+.hidden {
+    display: none;
+}
+
+i.fad {
+    pointer-events: none;
+}
