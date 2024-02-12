@@ -4,11 +4,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    @livewireStyles
 @endsection
 
 @section('script')
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
+    @livewireScripts
 @endsection
 
 @section('content')
@@ -36,38 +38,7 @@
                     </p>
                 </div>
 
-                <div class="relative mb-4 flex flex-col">
-                    <div class="flex">
-                        <label
-                            class="bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/3">
-                            First Name
-                        </label>
-                        <form id="first-name-form" action="{{ route('admin.profile.updateField', 'first_name') }}"
-                            method="POST" class="flex-grow">
-                            @csrf
-                            @method('PATCH')
-                            <input type="text" name="first_name" id="first_name"
-                                class="border border-teal-400 h-full outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
-                                value="Sakhawat" readonly>
-                        </form>
-                        <div class="flex action-buttons">
-                            <button id="edit-btn-first-name"
-                                class="edit-btn inline-block rounded-none px-2 py-2 text-xs font-medium uppercase leading-normal text-primary transition duration-200 ease-in-out hover:bg-teal-500 hover:text-white focus:outline-none"
-                                data-inputid="first_name" title="Edit">
-                                <i class="fad fa-pencil"></i>
-                            </button>
-                            <button id="save-btn-first-name" type="submit"
-                                class="hidden save-btn inline-block rounded-none px-2 py-2 text-xs font-medium uppercase leading-normal text-primary transition duration-200 ease-in-out hover:bg-teal-500 hover:text-white focus:outline-none"
-                                data-inputid="first_name" data-edit-btn-id="edit-btn-first-name"
-                                data-form-id="first-name-form" title="Save">
-                                <i class="fad fa-check-double"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="error">
-                        this is an error
-                    </div>
-                </div>
+                <livewire:InputBox label="First Name" type="text" field="first_name" value="Sakhawat Hussain" />
 
                 <div class="relative mb-4 flex flex-wrap items-stretch">
                     <label
