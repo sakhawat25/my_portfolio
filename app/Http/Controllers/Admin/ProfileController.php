@@ -12,7 +12,9 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        return view('admin.profile.index');
+        $user = auth()->user();
+
+        return view('admin.profile.index', compact('user'));
     }
 
     public function updateField(Request $request, $field)
