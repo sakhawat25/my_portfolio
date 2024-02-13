@@ -14,7 +14,6 @@ $(document).ready(function () {
         backDelay: 2000,
     });
 
-
     /*
      * For titles input on profile page
      */
@@ -30,11 +29,10 @@ $(document).ready(function () {
             })
     );
 
-
     /*
      * For edit button on profile page
      */
-    $(".action-buttons").on("click", ".edit-btn", function(event) {
+    $(".action-buttons").on("click", ".edit-btn", function (event) {
         const $clickedButton = $(event.target);
         const $inputElement = $("#" + $clickedButton.data("inputid"));
         const $saveButton = $clickedButton.next(".save-btn");
@@ -45,13 +43,12 @@ $(document).ready(function () {
 
         $clickedButton.hide();
         $saveButton.show();
-      });
+    });
 
-
-      /*
+    /*
      * For save button on profile page
      */
-    $(".action-buttons").on("click", ".save-btn", async function(event) {
+    $(".action-buttons").on("click", ".save-btn", async function (event) {
         const $clickedButton = $(event.target);
         const $inputElement = $("#" + $clickedButton.data("inputid"));
         const $formElement = $("#" + $clickedButton.data("form-id"));
@@ -62,22 +59,34 @@ $(document).ready(function () {
         const formData = new FormData($formElement[0]);
         const formAction = $formElement[0].action;
 
-        axios.post(formAction, formData)
-            .then(response => {
+        axios
+            .post(formAction, formData)
+            .then((response) => {
+                // Successful request
                 $inputElement.prop("disabled", true);
                 $editButton.show();
                 $clickedButton.hide();
+                $errorDiv.hide();
             })
-            .catch(error => {
-                console.log('request is unsuccessful');
-
+            .catch((error) => {
                 if (error.request.status === 400) {
                     // Validation error
-                    console.log('Its a validation error');
+                    console.log("Its a validation error");
+                    const inputElementName = $inputElement[0].name;
+                    const $errorsObject = JSON.parse(
+                        error.response.data.errors
+                    );
+                    const $validationErrorsArray =
+                        $errorsObject[inputElementName];
+
+                    $errorDiv.text($validationErrorsArray[0]);
+                    $errorDiv.show();
+                } else {
+                    // Another error
+                    console.log("Error: ", error);
                 }
             });
-      });
-
+    });
 
     /*
      * For updating profile image on profile page
