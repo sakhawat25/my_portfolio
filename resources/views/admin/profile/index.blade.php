@@ -9,8 +9,7 @@
 
 @section('script')
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     @livewireScripts
 @endsection
@@ -40,7 +39,7 @@
                     </p>
                 </div>
 
-                <livewire:InputBox label="First Name" type="text" field="first_name" value="Sakhawat Hussain" />
+                <livewire:InputBox label="First Name" type="text" field="first_name" value="{{ $user->first_name }}" />
 
                 <div class="relative mb-4 flex flex-wrap items-stretch">
                     <label

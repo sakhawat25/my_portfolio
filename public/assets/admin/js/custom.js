@@ -2,10 +2,8 @@ $(document).ready(function () {
     /*
      * For showing titles in a loop
      */
-    const title = $("#title");
-
-    const titles = title.attr("data-typed-items");
-
+    const $title = $("#title");
+    const titles = $title.data("typed-items");
     const titlesArray = titles.split(",");
 
     var typed = new Typed("#title", {
@@ -16,13 +14,14 @@ $(document).ready(function () {
         backDelay: 2000,
     });
 
+
     /*
      * For titles input on profile page
      */
-    const inputElements = document.querySelectorAll(".tagify");
+    const inputElements = $(".tagify");
 
-    inputElements.forEach(
-        (input) =>
+    inputElements.each(
+        (index, input) =>
             new Tagify(input, {
                 transformTag: function (tagData) {
                     tagData.style =
@@ -31,58 +30,54 @@ $(document).ready(function () {
             })
     );
 
+
     /*
-     * For action buttons on profile page
+     * For edit button on profile page
      */
-    const container = document.querySelector(".action-buttons"); // Parent element
+    $(".action-buttons").on("click", ".edit-btn", function(event) {
+        const $clickedButton = $(event.target);
+        const $inputElement = $("#" + $clickedButton.data("inputid"));
+        const $saveButton = $clickedButton.next(".save-btn");
 
-    container.addEventListener("click", (event) => {
-        const clickedButton = event.target;
+        // Temporarily remove content, focus, then append it back
+        const currentValue = $inputElement.val();
+        $inputElement.val("").prop("disabled", false).val(currentValue).focus();
 
-        if (clickedButton.matches(".edit-btn")) {
-            console.log("edit button clicked");
-            handleEditButtonClick(clickedButton);
-        } else if (clickedButton.matches(".save-btn")) {
-            console.log("save button clicked");
-            event.preventDefault();
-            handleSaveButtonClick(clickedButton);
-        }
-    });
+        $clickedButton.hide();
+        $saveButton.show();
+      });
 
-    // Makes input element editable and hides edit button
-    function handleEditButtonClick(clickedButton) {
-        const inputElementId = clickedButton.getAttribute("data-inputid");
-        const inputElement = document.getElementById(inputElementId);
-        inputElement.removeAttribute("readonly");
-        inputElement.focus();
-        inputElement.selectionStart = inputElement.value.length;
-        inputElement.selectionEnd = inputElement.value.length;
-        clickedButton.classList.add("hidden");
-        const parent = clickedButton.parentNode;
-        const siblingButtons = Array.from(
-            parent.querySelectorAll("button")
-        ).filter((button) => button !== clickedButton);
-        siblingButtons.forEach((button) => button.classList.remove("hidden"));
-    }
 
-    // Makes input element readonly, submits form and hides cancel and save button
-    async function handleSaveButtonClick(clickedButton) {
-        // Get element ids
-        const inputElementId = clickedButton.getAttribute("data-inputid");
-        const formElementId = clickedButton.getAttribute("data-form-id");
-        const editButtonId = clickedButton.getAttribute("data-edit-btn-id");
-        const errorDivId = clickedButton.getAttribute("data-error-div-id");
-
-        // Get elements
-        const inputElement = document.getElementById(inputElementId);
-        const formElement = document.getElementById(formElementId);
-        const editButton = document.getElementById(editButtonId);
-        const errorDiv = document.getElementById(errorDivId);
+      /*
+     * For save button on profile page
+     */
+    $(".action-buttons").on("click", ".save-btn", async function(event) {
+        const $clickedButton = $(event.target);
+        const $inputElement = $("#" + $clickedButton.data("inputid"));
+        const $formElement = $("#" + $clickedButton.data("form-id"));
+        const $editButton = $("#" + $clickedButton.data("edit-btn-id"));
+        const $errorDiv = $("#" + $clickedButton.data("error-div-id"));
 
         // Perform form submission through AJAX
-        const formData = new FormData(formElement);
-        const formAction = formElement.action;
-    }
+        const formData = new FormData($formElement[0]);
+        const formAction = $formElement[0].action;
+
+        axios.post(formAction, formData)
+            .then(response => {
+                $inputElement.prop("disabled", true);
+                $editButton.show();
+                $clickedButton.hide();
+            })
+            .catch(error => {
+                console.log('request is unsuccessful');
+
+                if (error.request.status === 400) {
+                    // Validation error
+                    console.log('Its a validation error');
+                }
+            });
+      });
+
 
     /*
      * For updating profile image on profile page
@@ -101,8 +96,4 @@ $(document).ready(function () {
             URL.revokeObjectURL(output.src); // free memory
         };
     });
-
-    $.get("/")
-        .done((data) => console.log(data))
-        .fail((error) => console.log(error));
 });

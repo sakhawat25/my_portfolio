@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
@@ -51,14 +51,14 @@ class ProfileController extends Controller
             // Prepare successful response
             $response = [
                 'success' => true,
-                'field' => $field,
-                $field => $user->$field, // Updated value
+                'message' => 'Record updated successfully',
             ];
 
             return response()->json($response);
         } catch (\Exception $e) {
             // Handle errors gracefully, log for debugging, and return informative JSON response
             Log::error($e->getMessage());
+
             return response()->json(['error' => 'An error occurred while updating the field.'], 500);
         }
     }

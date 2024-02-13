@@ -14,7 +14,7 @@
             @method('PATCH')
             <input type="{{ $type }}" name="{{ $field }}" id="{{ $field }}"
                 class="border border-teal-400 h-full outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
-                value="{{ $value }}" readonly>
+                value="{{ $value }}" disabled>
         </form>
         <div class="flex action-buttons">
             <button id="edit_btn_{{ $field }}"
