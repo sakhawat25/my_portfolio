@@ -27,10 +27,47 @@ class ProfileController extends Controller
             case 'first_name':
                 $validationRules['first_name'] = 'required|string|max:255';
                 break;
+
+            case 'last_name':
+                $validationRules['last_name'] = 'required|string|max:255';
+                break;
+
             case 'email':
                 $validationRules['email'] = 'required|email|unique:users,email';
                 break;
-                // ... add other fields and validation rules here
+
+            case 'github_link':
+                $validationRules['github_link'] = 'nullable|url|string|max:255';
+                break;
+
+            case 'linkedin_link':
+                $validationRules['linkedin_link'] = 'nullable|url|string|max:255';
+                break;
+
+            case 'twitter_link':
+                $validationRules['twitter_link'] = 'nullable|url|string|max:255';
+                break;
+
+            case 'address':
+                $validationRules['address'] = 'nullable|string|max:255';
+                break;
+
+            case 'date_of_birth':
+                $validationRules['date_of_birth'] = 'nullable|date|max:255';
+                break;
+
+            case 'country':
+                $validationRules['country'] = 'nullable|string|max:255';
+                break;
+
+            case 'state':
+                $validationRules['state'] = 'nullable|string|max:255';
+                break;
+
+            case 'city':
+                $validationRules['city'] = 'nullable|string|max:255';
+                break;
+
             default:
                 return response()->json(['error' => 'Invalid field'], 400);
         }
@@ -61,5 +98,29 @@ class ProfileController extends Controller
 
             return response()->json(['error' => 'An error occurred while updating the field.'], 500);
         }
+    }
+
+    /*
+     * Updates profile picture
+     */
+    public function updatePicture(Request $request)
+    {
+        // Validation
+        $validationRules = [
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:1024'
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Update
+        $image = $request->file('image');
+        $imageName = time() . '_' . date('d-m-Y') . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+
+        return redirect()->back()->with('message', 'Your profile picture has been updated.');
     }
 }

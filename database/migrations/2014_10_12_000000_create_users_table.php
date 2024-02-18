@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('linkedin_link', 150)->nullable();
             $table->string('facebook_link', 150)->nullable();
             $table->string('twitter_link', 150)->nullable();
+            $table->string('titles', 200)->nullable();
             $table->string('cv', 100)->nullable();
+            $table->string('cv_image', 100)->nullable();
             $table->string('address', 200)->nullable();
             $table->date('date_of_birth')->nullable();
             $table->string('country', 50)->nullable();

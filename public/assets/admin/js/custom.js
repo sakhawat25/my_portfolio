@@ -91,18 +91,54 @@ $(document).ready(function () {
     /*
      * For updating profile image on profile page
      */
-    const profileImageInput = document.getElementById("image");
+    // const profileImageInput = document.getElementById("image");
 
-    profileImageInput.addEventListener("change", (event) => {
-        const input = event.target;
-        const file = input.files[0];
-        const type = file.type;
+    // profileImageInput.addEventListener("change", (event) => {
+    //     const input = event.target;
+    //     const file = input.files[0];
+    //     const type = file.type;
 
-        const output = document.getElementById("preview_img");
+    //     const output = document.getElementById("preview_img");
 
-        output.src = URL.createObjectURL(file);
-        output.onload = function () {
-            URL.revokeObjectURL(output.src); // free memory
-        };
+    //     output.src = URL.createObjectURL(file);
+    //     output.onload = function () {
+    //         URL.revokeObjectURL(output.src); // free memory
+    //     };
+    // });
+
+    const $profilePictureContainer = $(".profile-picture-container");
+    const $selectPictureButton = $("#select-picture-button");
+    const $profileImageInputElement = $("#profile-image");
+
+    $profilePictureContainer.on("mouseover", (event) => {
+        $("#select-picture-button").show();
+    });
+
+    $profilePictureContainer.on("mouseleave", (event) => {
+        $("#select-picture-button").hide();
+    });
+
+    $selectPictureButton.on("click", (event) => {
+        $profileImageInputElement.click();
+    });
+
+    $profileImageInputElement.on("change", (event) => {
+        const $form = $(event.target)[0].form;
+        $form.submit();
+    });
+
+    /*
+     * For closing flash messages
+     */
+    $closeErrorButton = $("#close-error-message-button");
+
+    $closeErrorButton.on("click", (event) => {
+        $(event.target).parent().hide();
+    });
+
+    $closeSuccessButton = $("#close-success-message-button");
+
+    $closeSuccessButton.on("click", (event) => {
+        $(event.target).parent().hide();
     });
 });

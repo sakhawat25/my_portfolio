@@ -12,6 +12,11 @@
     display: none;
 }
 
-i.fad {
+i.fad,
+i.fa {
     pointer-events: none;
 }
+
+/*
+ * For profile picture on profile page
+ */

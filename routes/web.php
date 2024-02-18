@@ -26,4 +26,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/profile', [ProfileController::class, 'index'])->name('admin.profile');
     Route::patch('/profile/update/{field}', [ProfileController::class, 'updateField'])->name('admin.profile.updateField');
+    Route::post('/profile/update-picture/', [ProfileController::class, 'updatePicture'])->name('admin.profile.updatePicture');
 });
