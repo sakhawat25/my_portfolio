@@ -91,20 +91,6 @@ $(document).ready(function () {
     /*
      * For updating profile image on profile page
      */
-    // const profileImageInput = document.getElementById("image");
-
-    // profileImageInput.addEventListener("change", (event) => {
-    //     const input = event.target;
-    //     const file = input.files[0];
-    //     const type = file.type;
-
-    //     const output = document.getElementById("preview_img");
-
-    //     output.src = URL.createObjectURL(file);
-    //     output.onload = function () {
-    //         URL.revokeObjectURL(output.src); // free memory
-    //     };
-    // });
 
     const $profilePictureContainer = $(".profile-picture-container");
     const $selectPictureButton = $("#select-picture-button");
@@ -141,4 +127,81 @@ $(document).ready(function () {
     $closeSuccessButton.on("click", (event) => {
         $(event.target).parent().hide();
     });
+
+    /*
+     * For updating profile image on profile page
+     */
+
+    const $cvPictureContainer = $(".cv-container");
+    const $selectCVButton = $("#select-cv-button");
+    const $cvImageInputElement = $("#cv-image-input");
+
+    $cvPictureContainer.on("mouseover", (event) => {
+        $("#select-cv-button").show();
+    });
+
+    $cvPictureContainer.on("mouseleave", (event) => {
+        $("#select-cv-button").hide();
+    });
+
+    $selectCVButton.on("click", (event) => {
+        $cvImageInputElement.click();
+    });
+
+    $cvImageInputElement.on("change", (event) => {
+        const allowedFileExtensions = ['.pdf'];
+        const maxFileSizeMB = 2; // 2 MB
+        const file = event.target.files[0];
+
+        // Check file extension
+        const index = file.name.lastIndexOf('.');
+        const fileExtension = file.name.slice(index).toLowerCase();
+        if ($.inArray(fileExtension, allowedFileExtensions) === -1) {
+            alert("Only PDF format is allowed to update your CV!");
+            return;
+        }
+
+        // Check file size
+        const fileSizeMB = file.size / (1024 * 1024); // Convert bytes to MB
+        if (fileSizeMB > maxFileSizeMB) {
+            alert("File size exceeds the maximum limit of 1 MB!");
+            return;
+        }
+
+        // Proceed with asynchronous conversion and rendering
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            const typedarray = new Uint8Array(e.target.result);
+
+            // Load PDF using pdf.js
+            const pdf = await pdfjsLib.getDocument(typedarray).promise;
+
+            // Fetch the first page
+            const page = await pdf.getPage(1);
+            const viewport = page.getViewport({ scale: 1.0 });
+
+            // Prepare canvas for rendering
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            // Render PDF page to canvas
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport
+            };
+            await page.render(renderContext).promise;
+
+            // Convert canvas to base64 image data
+            const imageDataURL = canvas.toDataURL('image/png');
+
+            // Render the image on the element with ID "cv-picture"
+            $('#cv-picture').attr('src', imageDataURL);
+        };
+
+        reader.readAsArrayBuffer(file);
+        });
 });

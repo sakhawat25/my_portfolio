@@ -4,6 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     @livewireStyles
 @endsection
 
@@ -87,20 +88,22 @@
                         CV
                     </label>
 
-                    <input
-                        class="relative m-0 block w-full min-w-0 flex-auto rounded border border-solid border-teal-400 bg-clip-padding px-2 py-2 text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-teal-500 focus:text-neutral-700 focus:shadow-te-primary focus:outline-none"
-                        type="file" id="formFile" />
-                </div>
-
-                <div class="flex flex-col py-2">
-                    <label
-                        class="w-full inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out">
-                        Preview CV
-                    </label>
-
-                    <div class="flex justify-center">
-                        <img src="{{ asset('images/profile_pic.png') }}" alt="" srcset=""
-                            class="h-24 object-scale-down w-1/2">
+                    <div class="flex flex-col items-center pb-10 gap-2">
+                        <div class="flex justify-center">
+                            <div class="relative w-1/4 cv-container">
+                                <img id='cv-picture' src="{{ asset('images/cv.jpg') }}"
+                                    alt="cv" class="w-full" />
+                                <button id="select-cv-button"
+                                    class="hidden absolute bg-teal-400 inset-0 opacity-75 outline-none focus:outline-none"
+                                    title="Update CV">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <input type="file" name="image" id="cv-image-input" class="hidden">
+                            </div>
+                        </div>
+                        <button id="view-cv-button"
+                                    class="bg-teal-400 py-2 px-10 text-white text-sm uppercase inset-0 outline-none focus:outline-none hover:bg-teal-500"
+                                    title="View CV">VIEW CV</button>
                     </div>
                 </div>
 
