@@ -204,4 +204,27 @@ $(document).ready(function () {
 
         reader.readAsArrayBuffer(file);
         });
+
+        /*
+         * View Cv button click event handler
+         */
+        $('#view-cv-button').on('click', (event) => {
+            var fileInput = document.getElementById('cv-image-input');
+            var file = fileInput.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var pdfUrl = e.target.result;
+                    window.open(pdfUrl, '_blank');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select a PDF file.');
+            }
+
+            // const fileUrl = '/images/cv.jpg';
+            // window.open(fileUrl, '_blank');
+            // console.log(fileUrl);
+        });
 });
