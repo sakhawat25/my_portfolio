@@ -145,6 +145,7 @@ $(document).ready(function () {
     });
 
     $selectCVButton.on("click", (event) => {
+        event.preventDefault();
         $cvImageInputElement.click();
     });
 
@@ -209,22 +210,21 @@ $(document).ready(function () {
          * View Cv button click event handler
          */
         $('#view-cv-button').on('click', (event) => {
+            event.preventDefault();
             var fileInput = document.getElementById('cv-image-input');
             var file = fileInput.files[0];
+            console.log(file);
 
             if (file) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    var pdfUrl = e.target.result;
+                    var pdfBlob = new Blob([e.target.result], { type: 'application/pdf' });
+                    var pdfUrl = URL.createObjectURL(pdfBlob);
                     window.open(pdfUrl, '_blank');
                 };
-                reader.readAsDataURL(file);
+                reader.readAsArrayBuffer(file);
             } else {
                 alert('Please select a PDF file.');
             }
-
-            // const fileUrl = '/images/cv.jpg';
-            // window.open(fileUrl, '_blank');
-            // console.log(fileUrl);
         });
 });

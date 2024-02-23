@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Spatie\PdfToImage\Pdf;
 
 class ProfileController extends Controller
 {
@@ -107,7 +108,7 @@ class ProfileController extends Controller
     {
         // Validation
         $validationRules = [
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:1024'
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:1024',
         ];
 
         $validator = Validator::make($request->all(), $validationRules);
@@ -118,9 +119,55 @@ class ProfileController extends Controller
 
         // Update
         $image = $request->file('image');
-        $imageName = time() . '_' . date('d-m-Y') . '.' . $image->getClientOriginalExtension();
+        $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
 
         return redirect()->back()->with('message', 'Your profile picture has been updated.');
+    }
+
+    /*
+     * Right side of profile page
+     */
+    public function updatePersonalInfo(Request $request)
+    {
+        // Validation
+        $validatedData = $request->validate([
+            'titles' => 'nullable|string',
+            'cv' => 'nullable|file|mimes:pdf|max:2048',
+            'introduction' => 'nullable|string',
+        ]);
+
+        // User titles update
+        $titles = json_decode($request->titles);
+
+        $titlesArray = [];
+
+        foreach ($titles as $title) {
+            array_push($titlesArray, $title->value);
+        }
+
+        $titles = join(', ', $titlesArray);
+
+        $validatedData['titles'] = $titles;
+
+        // Update cv
+        if ($request->hasFile('cv')) {
+            // Store cv
+            $cv = $request->file('cv');
+            $fileName = $cv->getClientOriginalName();
+            $cv->move(public_path('files'), $fileName);
+            $validatedData['cv'] = $fileName;
+
+            // store cv image
+            $filePath = public_path('files/'.$fileName);
+            $pdf = new Pdf($filePath);
+            $cvImageName = time().'_'.date('d-m-Y').'.png';
+            $pdf->saveImage(public_path('images/'.$cvImageName));
+            $validatedData['cv_image'] = $cvImageName;
+        }
+
+        auth()->user()->update($validatedData);
+
+        return redirect()->back()->with('message', 'Your personal information has been updated.');
     }
 }

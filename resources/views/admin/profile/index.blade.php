@@ -71,59 +71,79 @@
 
             <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md">
                 <div class="bg-gray-400 w-full text-center py-5 mb-5 uppercase"><strong>Personal Information</strong></div>
-                <div class="flex flex-col py-2">
-                    <label
-                        class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
-                        Titles
-                    </label>
+                <form action="{{ route('admin.profile.updatePersonalInfo') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="flex flex-col py-2">
+                        <label
+                            class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
+                            Titles
+                        </label>
 
-                    <input type="text" name="titles"
-                        class="tagify w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
-                        value="Backend Developer, Laravel" />
-                </div>
-
-                <div class="flex flex-col py-2">
-                    <label
-                        class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
-                        CV
-                    </label>
-
-                    <div class="flex flex-col items-center pb-10 gap-2">
-                        <div class="flex justify-center">
-                            <div class="relative w-1/4 cv-container">
-                                <img id='cv-picture' src="{{ asset('images/cv.jpg') }}"
-                                    alt="cv" class="w-full" />
-                                <button id="select-cv-button"
-                                    class="hidden absolute bg-teal-400 inset-0 opacity-75 outline-none focus:outline-none"
-                                    title="Update CV">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <input type="file" name="image" id="cv-image-input" class="hidden">
+                        @error('titles')
+                            <div id="titles_error" class="normal-case text-red-500 text-sm font-medium pb-1">
+                                {{ $message }}
                             </div>
-                        </div>
-                        <button id="view-cv-button"
-                                    class="bg-teal-400 py-2 px-10 text-white text-sm uppercase inset-0 outline-none focus:outline-none hover:bg-teal-500"
-                                    title="View CV">VIEW CV</button>
+                        @enderror
+
+                        <input type="text" name="titles"
+                            class="tagify w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
+                            value="Backend Developer, Laravel" />
                     </div>
-                </div>
 
-                <div class="flex flex-col py-2">
-                    <label
-                        class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
-                        About
-                    </label>
+                    <div class="flex flex-col py-2">
+                        <label
+                            class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
+                            CV
+                        </label>
 
-                    <textarea rows="5"
-                        class="w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-2 py-2 text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, corrupti? Obcaecati similique vitae voluptas ipsam velit pariatur quisquam placeat impedit sequi veniam nobis in molestias aperiam fugiat, neque omnis rerum?</textarea>
-                </div>
+                        @error('cv')
+                            <div id="titles_error" class="normal-case text-red-500 text-sm font-medium pb-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
-                <div class="flex justify-end py-2">
-                    <button
-                        class="w-full bg-teal-400 inline-block rounded-none px-6 py-2 text-sm font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-teal-500">
-                        Update
-                    </button>
-                </div>
+                        <div class="flex flex-col items-center pb-10 gap-2">
+                            <div class="flex justify-center">
+                                <div class="relative w-1/4 cv-container">
+                                    <img id='cv-picture' src="{{ asset('images/cv.jpg') }}"
+                                        alt="cv" class="w-full" />
+                                    <button id="select-cv-button"
+                                        class="hidden absolute bg-teal-400 inset-0 opacity-75 outline-none focus:outline-none"
+                                        title="Update CV">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <input type="file" name="cv" id="cv-image-input" class="hidden">
+                                </div>
+                            </div>
+                            <button id="view-cv-button"
+                                        class="bg-teal-400 py-2 px-10 text-white text-sm uppercase inset-0 outline-none focus:outline-none hover:bg-teal-500"
+                                        title="View CV">VIEW CV</button>
+                        </div>
+                    </div>
 
+                    <div class="flex flex-col py-2">
+                        <label
+                            class="w-1/4 inline-block rounded-none px-2 py-2 text-md font-medium uppercase leading-normal transition duration-150 ease-in-out md:w-1/3">
+                            About
+                        </label>
+
+                        @error('introduction')
+                            <div id="titles_error" class="normal-case text-red-500 text-sm font-medium pb-1">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                        <textarea rows="5" name="introduction"
+                            class="w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-2 py-2 text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, corrupti? Obcaecati similique vitae voluptas ipsam velit pariatur quisquam placeat impedit sequi veniam nobis in molestias aperiam fugiat, neque omnis rerum?</textarea>
+                    </div>
+
+                    <div class="flex justify-end py-2">
+                        <button type="submit"
+                            class="w-full bg-teal-400 inline-block rounded-none px-6 py-2 text-sm font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-teal-500">
+                            Update
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
