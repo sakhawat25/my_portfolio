@@ -129,7 +129,7 @@ $(document).ready(function () {
     });
 
     /*
-     * For updating profile image on profile page
+     * For updating cv image on profile page
      */
 
     const $cvPictureContainer = $(".cv-container");
@@ -150,12 +150,12 @@ $(document).ready(function () {
     });
 
     $cvImageInputElement.on("change", (event) => {
-        const allowedFileExtensions = ['.pdf'];
+        const allowedFileExtensions = [".pdf"];
         const maxFileSizeMB = 2; // 2 MB
         const file = event.target.files[0];
 
         // Check file extension
-        const index = file.name.lastIndexOf('.');
+        const index = file.name.lastIndexOf(".");
         const fileExtension = file.name.slice(index).toLowerCase();
         if ($.inArray(fileExtension, allowedFileExtensions) === -1) {
             alert("Only PDF format is allowed to update your CV!");
@@ -170,10 +170,11 @@ $(document).ready(function () {
         }
 
         // Proceed with asynchronous conversion and rendering
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js';
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js";
 
         const reader = new FileReader();
-        reader.onload = async function(e) {
+        reader.onload = async function (e) {
             const typedarray = new Uint8Array(e.target.result);
 
             // Load PDF using pdf.js
@@ -184,47 +185,73 @@ $(document).ready(function () {
             const viewport = page.getViewport({ scale: 1.0 });
 
             // Prepare canvas for rendering
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
             canvas.height = viewport.height;
             canvas.width = viewport.width;
 
             // Render PDF page to canvas
             const renderContext = {
                 canvasContext: context,
-                viewport: viewport
+                viewport: viewport,
             };
             await page.render(renderContext).promise;
 
             // Convert canvas to base64 image data
-            const imageDataURL = canvas.toDataURL('image/png');
+            const imageDataURL = canvas.toDataURL("image/png");
 
             // Render the image on the element with ID "cv-picture"
-            $('#cv-picture').attr('src', imageDataURL);
+            $("#cv-picture").attr("src", imageDataURL);
+
+            $("#cv_image").val(imageDataURL);
         };
 
         reader.readAsArrayBuffer(file);
-        });
+    });
 
-        /*
-         * View Cv button click event handler
-         */
-        $('#view-cv-button').on('click', (event) => {
-            event.preventDefault();
-            var fileInput = document.getElementById('cv-image-input');
-            var file = fileInput.files[0];
-            console.log(file);
+    /*
+     * View Cv button click event handler
+     */
+    $("#view-cv-button").on("click", (event) => {
+        event.preventDefault();
+        var fileInput = document.getElementById("cv-image-input");
+        var file = fileInput.files[0];
 
-            if (file) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var pdfBlob = new Blob([e.target.result], { type: 'application/pdf' });
-                    var pdfUrl = URL.createObjectURL(pdfBlob);
-                    window.open(pdfUrl, '_blank');
-                };
-                reader.readAsArrayBuffer(file);
-            } else {
-                alert('Please select a PDF file.');
-            }
-        });
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var pdfBlob = new Blob([e.target.result], {
+                    type: "application/pdf",
+                });
+                var pdfUrl = URL.createObjectURL(pdfBlob);
+                window.open(pdfUrl, "_blank");
+            };
+            reader.readAsArrayBuffer(file);
+        } else {
+            const pdfFileUrl = $(event.target).data("cv-path");
+            // window.open(pdfFileUrl, "_blank");
+
+            // Make a GET request using Axios
+            axios
+                .get(pdfFileUrl, { responseType: "blob" })
+                .then((response) => {
+                    // Convert the response data to a blob
+                    const blob = new Blob([response.data], {
+                        type: "application/pdf",
+                    });
+
+                    // Create a blob URL
+                    const blobUrl = URL.createObjectURL(blob);
+
+                    // Open the blob URL in a new tab using jQuery
+                    $("<a>", {
+                        href: blobUrl,
+                        target: "_blank",
+                    })[0].click();
+                })
+                .catch((error) => {
+                    console.error("Error fetching file:", error);
+                });
+        }
+    });
 });

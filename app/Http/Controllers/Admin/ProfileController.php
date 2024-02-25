@@ -119,7 +119,7 @@ class ProfileController extends Controller
 
         // Update
         $image = $request->file('image');
-        $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+        $imageName = time() . '_' . date('d-m-Y') . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
 
         return redirect()->back()->with('message', 'Your profile picture has been updated.');
@@ -154,16 +154,30 @@ class ProfileController extends Controller
         if ($request->hasFile('cv')) {
             // Store cv
             $cv = $request->file('cv');
-            $fileName = $cv->getClientOriginalName();
+            $fileName = uniqid() . '.' . $cv->getClientOriginalExtension();
             $cv->move(public_path('files'), $fileName);
             $validatedData['cv'] = $fileName;
 
             // store cv image
-            $filePath = public_path('files/'.$fileName);
-            $pdf = new Pdf($filePath);
-            $cvImageName = time().'_'.date('d-m-Y').'.png';
-            $pdf->saveImage(public_path('images/'.$cvImageName));
-            $validatedData['cv_image'] = $cvImageName;
+            // Get the imageDataUrl from the client-side
+            $imageDataUrl = $request->cv_image;
+
+            // Remove the "data:image/png;base64," from the imageDataUrl
+            $base64_string = preg_replace('/^data:image\/\w+;base64,/', '', $imageDataUrl);
+
+            // Decode the base64 string into binary data
+            $imageData = base64_decode($base64_string);
+
+            // Define the file name for the new image (you can customize the file name as needed)
+            $imageName = time() . '_' . date('d-m-Y') . '.png';
+
+            // Specify the path where you want to save the image
+            $path = public_path('images/' . $imageName);  // Example: 'images/new_image.png'
+
+            // Save the image data to the specified path
+            file_put_contents($path, $imageData);
+
+            $validatedData['cv_image'] = $imageName;
         }
 
         auth()->user()->update($validatedData);
