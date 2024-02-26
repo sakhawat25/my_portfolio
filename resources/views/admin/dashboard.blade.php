@@ -19,13 +19,13 @@
 
                     <!-- info -->
                     <div class="py-2 ml-10">
-                        <h1 class="h6">Sakhawat Hussain</h1>
+                        <h1 class="h6">{{ $user->first_name }} {{ $user->last_name }}</h1>
                         <p class="text-white text-xs">
                             <span id="title" data-typed-items="Laravel Developer, Backend Developer"></span>
                         </p>
 
                         <p class="text-white tex-xs mt-4">
-                            I am a web developer with experience in Laravel, PHP, Django, CSS, HTML and JavaScript...
+                            {{ Str::limit($user->introduction, 100, '...') }}
                         </p>
                     </div>
                     <!-- end info -->

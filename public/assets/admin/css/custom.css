@@ -18,5 +18,8 @@ i.fa {
 }
 
 /*
- * For profile picture on profile page
+ * For loader inside input box on profile page
  */
+ input.loading {
+    background: url(http://www.xiconeditor.com/image/icons/loading.gif) no-repeat right center;
+}

@@ -55,6 +55,8 @@ $(document).ready(function () {
         const $editButton = $("#" + $clickedButton.data("edit-btn-id"));
         const $errorDiv = $("#" + $clickedButton.data("error-div-id"));
 
+        $inputElement.addClass("loading");
+
         // Perform form submission through AJAX
         const formData = new FormData($formElement[0]);
         const formAction = $formElement[0].action;
@@ -63,7 +65,7 @@ $(document).ready(function () {
             .post(formAction, formData)
             .then((response) => {
                 // Successful request
-                $inputElement.prop("disabled", true);
+                $inputElement.removeClass("loading").prop("disabled", true);
                 $editButton.show();
                 $clickedButton.hide();
                 $errorDiv.hide();

@@ -4,13 +4,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
     <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     @livewireStyles
 @endsection
 
 @section('script')
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
     @livewireScripts
 @endsection
@@ -93,7 +93,13 @@
                         <div class="flex flex-col items-center pb-10 gap-2">
                             <div class="flex justify-center">
                                 <div class="relative w-1/4 cv-container">
-                                    <img id='cv-picture' src="{{ asset('images/' . $user->cv_image) }}" alt="cv"
+                                    <img id='cv-picture'
+                                        src="@if ($user->cv_image)
+                                                {{ asset('images/' . $user->cv_image) }}
+                                            @else
+                                                {{ asset('images/no-image.jpg') }}
+                                            @endif"
+                                        alt="cv"
                                         class="w-full" />
                                     <button id="select-cv-button"
                                         class="hidden absolute bg-teal-400 inset-0 opacity-75 outline-none focus:outline-none"
@@ -106,7 +112,7 @@
                             </div>
                             <button id="view-cv-button"
                                 class="bg-teal-400 py-2 px-10 text-white text-sm uppercase inset-0 outline-none focus:outline-none hover:bg-teal-500"
-                                title="View CV" data-cv-path="{{ asset('files/' . $user->cv) }}">VIEW CV</button>
+                                title="View CV" data-cv-path="{{ asset('files/' . $user->cv) }}" @if($user->cv == null) disabled @endif>VIEW CV</button>
                         </div>
                     </div>
 
