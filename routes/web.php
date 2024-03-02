@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WebHomeController::class, 'index']);
+Route::get('/', [WebHomeController::class, 'index'])->name('homepage');
 
 Route::get('login', function () {
     return view('auth.login');
