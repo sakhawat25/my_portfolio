@@ -8,9 +8,9 @@
     border: 1px solid #4fd1c5 !important;
 }
 
-.hidden {
+/* .hidden {
     display: none;
-}
+} */
 
 i.fad,
 i.fa {
@@ -20,6 +20,7 @@ i.fa {
 /*
  * For loader inside input box on profile page
  */
- input.loading {
-    background: url(http://www.xiconeditor.com/image/icons/loading.gif) no-repeat right center;
+input.loading {
+    background: url(http://www.xiconeditor.com/image/icons/loading.gif)
+        no-repeat right center;
 }

@@ -377,8 +377,8 @@
                 <!-- end link -->
 
                 <!-- link -->
-                <a href="#"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <a href="{{ route('admin.academics') }}"
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 @if (request()->route()->getName() === 'admin.academics') active @endif">
                     <i class="fad fa-comments text-xs mr-2"></i>
                     Academics
                 </a>

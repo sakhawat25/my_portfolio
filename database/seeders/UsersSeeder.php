@@ -19,6 +19,7 @@ class UsersSeeder extends Seeder
             'email' => 'sakhawathussainkaka@gmail.com',
             'image' => 'profile_pic01.jpg',
             'password' => bcrypt('Alaska@55'),
+            'cv_image' => 'no-image.jpg',
         ]);
     }
 }

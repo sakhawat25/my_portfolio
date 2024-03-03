@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AcademicsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\WebHomeController;
@@ -28,4 +29,11 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::patch('/profile/update/{field}', [ProfileController::class, 'updateField'])->name('admin.profile.updateField'); // left part of profile page admin side
     Route::post('/profile/update-picture/', [ProfileController::class, 'updatePicture'])->name('admin.profile.updatePicture');
     Route::post('/profile/update-personal-info/', [ProfileController::class, 'updatePersonalInfo'])->name('admin.profile.updatePersonalInfo'); // right part of profile page admin side
+
+    /*
+     * Routes for academics in admin panel
+     */
+    Route::prefix('academics')->controller(AcademicsController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.academics');
+    });
 });
