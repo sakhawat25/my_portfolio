@@ -10,4 +10,17 @@ $(document).ready(function () {
             $("#end_date_wrapper").show();
         }
     });
+
+    /*
+     * Show hide modal by default
+     */
+    const modal = $("#addEducationModal");
+    const showModal = modal.attr('data-show-modal');
+    if (showModal) {
+        // Show the modal
+        modal.get(0).showModal();
+    } else {
+        // Hide the modal
+        modal.get(0).close();
+    }
 });
