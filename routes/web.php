@@ -36,5 +36,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::prefix('academics')->controller(AcademicsController::class)->group(function () {
         Route::get('/', 'index')->name('admin.academics');
         Route::post('/education', 'storeEducation')->name('admin.academics.education.store');
+        Route::get('/education/{education}', 'showEducation')->name('admin.academics.education.show');
     });
 });

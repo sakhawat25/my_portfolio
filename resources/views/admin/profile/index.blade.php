@@ -16,15 +16,6 @@
 @endsection
 
 @section('content')
-    <div class="bg-gray-100 flex-1 p-6 justify-center md:mt-20">
-        @if ($errors->any())
-            <x-error-flash-message-component />
-        @endif
-
-        @if (session()->has('message'))
-            <x-success-flash-message-component :message="session('message')" />
-        @endif
-
         <div class="grid grid-cols-2 gap-6 xl:grid-cols-1">
             <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md">
                 <div class="bg-gray-400 w-full text-center py-5 mb-5 uppercase"><strong>Bio Data</strong></div>

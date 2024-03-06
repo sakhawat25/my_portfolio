@@ -6,7 +6,6 @@
 @endsection
 
 @section('content')
-    <div class="bg-gray-100 flex-1 p-6 md:mt-20">
         <div class="grid grid-cols-2 gap-6 xl:grid-cols-1">
             <!-- update section -->
             <div class="card bg-teal-400 border-teal-400 shadow-md text-white">

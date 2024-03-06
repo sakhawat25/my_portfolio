@@ -396,6 +396,15 @@
         </div>
         <!-- end sidbar -->
 
+        <div class="bg-gray-100 flex-1 p-6 justify-center md:mt-20">
+            @if ($errors->any())
+                <x-error-flash-message-component />
+            @endif
+
+            @if (session()->has('message'))
+                <x-success-flash-message-component :message="session('message')" />
+            @endif
+
         @yield('content')
 
     </div>
@@ -403,6 +412,7 @@
     <script src="{{ asset('assets/admin/js/scripts.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="{{ asset('assets/admin/js/global.js') }}"></script>
     @yield('script')
 </body>
 

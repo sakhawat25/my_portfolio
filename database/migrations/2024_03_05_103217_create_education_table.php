@@ -19,7 +19,7 @@ return new class() extends Migration {
             $table->text('description')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
-            $table->boolean('currently_studying', false);
+            $table->boolean('currently_studying')->default(false);
             $table->integer('sort')->default(1);
 
             $table->timestamps();
