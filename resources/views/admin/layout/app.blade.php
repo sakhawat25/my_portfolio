@@ -397,9 +397,9 @@
         <!-- end sidbar -->
 
         <div class="bg-gray-100 flex-1 p-6 justify-center md:mt-20">
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <x-error-flash-message-component />
-            @endif
+            @endif --}}
 
             @if (session()->has('message'))
                 <x-success-flash-message-component :message="session('message')" />

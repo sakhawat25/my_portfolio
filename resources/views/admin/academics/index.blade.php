@@ -163,7 +163,7 @@
                         <div class="flex">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Title&nbsp;*</label>
-                            <input type="text" name="title" id="editEducationTitle" value="{{ old('title') }}"
+                            <input type="text" name="title" id="edit_title" value="{{ old('title') }}"
                                 class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                         </div>
 
@@ -173,7 +173,7 @@
                         <div class="flex">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Institution&nbsp;*</label>
-                            <input type="text" name="institution" id="editEducationInstitution" value="{{ old('institution') }}"
+                            <input type="text" name="institution" id="edit_institution" value="{{ old('institution') }}"
                                 class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                         </div>
 
@@ -183,7 +183,7 @@
                         <div class="flex">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Grade Type</label>
-                            <select name="grade_type" id="editEducationGradeType" class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
+                            <select name="grade_type" id="edit_grade_type" class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                                 <option value="">Select grade type</option>
                                 <option value="cgpa">CGPA</option>
                                 <option value="percentage">Percentage</option>
@@ -197,7 +197,7 @@
                         <div class="flex">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Grade</label>
-                            <input type="text" name="grade" id="editEducationGrade" value="{{ old('grade') }}"
+                            <input type="text" name="grade" id="edit_grade" value="{{ old('grade') }}"
                                 class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                         </div>
 
@@ -207,22 +207,22 @@
                         <div class="flex">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Start Date&nbsp;*</label>
-                            <input type="date" name="start_date" id="editEducationStartDate" value="{{ old('start_date') }}"
+                            <input type="date" name="start_date" id="edit_start_date" value="{{ old('start_date') }}"
                                 class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                         </div>
 
                         <div class="flex gap-2">
-                            <input type="checkbox" name="currently_studying" id="editEducationCurrentlyStudying" value="1">
-                            <label for="currently_studying">Currently Studying</label>
+                            <input type="checkbox" name="currently_studying" id="edit_currently_studying" value="1">
+                            <label for="edit_currently_studying">Currently Studying</label>
                         </div>
 
                         @error('end_date')
                             <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
                         @enderror
-                        <div class="flex" id="end_date_wrapper">
+                        <div class="flex" id="edit_end_date_wrapper">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">End Date</label>
-                            <input type="date" name="end_date" id="editEducationEndDate" value="{{ old('end_date') }}"
+                            <input type="date" name="end_date" id="edit_end_date" value="{{ old('end_date') }}"
                                 class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                         </div>
 
@@ -232,7 +232,7 @@
                         <div class="flex">
                             <label
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Sort</label>
-                            <input type="number" name="sort" id="editEducationSort" value="{{ old('sort') }}"
+                            <input type="number" name="sort" id="edit_sort" value="{{ old('sort') }}"
                                 class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                         </div>
 
@@ -245,7 +245,7 @@
                                 class="w-1/4 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Description</label>
                                 <div class="w-full"></div>
                             </div>
-                            <textarea name="description" id="editEducationDescription" rows="10" class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">{{ old('description') }}</textarea>
+                            <textarea name="description" id="edit_description" rows="10" class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">{{ old('description') }}</textarea>
                         </div>
                     </div>
                 </form>
