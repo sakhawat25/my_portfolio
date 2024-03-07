@@ -65,6 +65,8 @@ $(document).ready(function () {
                 $("#edit_sort").val(data.sort);
                 $("#edit_description").val(data.description);
 
+                $("#editEducationForm").attr('action', updateRoute.replace(':id', data.id));
+
                 if (data.currently_studying) {
                     $("#edit_currently_studying").prop('checked', true);
                     $("#edit_end_date_wrapper").hide();

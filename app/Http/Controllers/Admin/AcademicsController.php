@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEducationRequest;
+use App\Http\Requests\UpdateEducationRequest;
 use App\Models\Education;
 
 class AcademicsController extends Controller
@@ -15,9 +16,23 @@ class AcademicsController extends Controller
     {
         $user = auth()->user();
 
+        $educations = Education::select(
+            'id',
+            'title',
+            'institution',
+            'grade_type',
+            'grade',
+            'start_date',
+            'end_date',
+            'currently_studying',
+            'description',
+        )
+            ->orderBy('sort', 'ASC')
+            ->get();
+
         // $showModal = true;
 
-        return view('admin.academics.index', compact('user'));
+        return view('admin.academics.index', compact('user', 'educations'));
     }
 
     /*
@@ -28,6 +43,8 @@ class AcademicsController extends Controller
         $validatedData = $request->validated();
 
         if (empty($validatedData['sort'])) {
+            $validatedData['sort'] = 1;
+        } elseif ($validatedData['sort'] < 1) {
             $validatedData['sort'] = 1;
         }
 
@@ -43,5 +60,25 @@ class AcademicsController extends Controller
     public function showEducation(Education $education)
     {
         return response()->json($education);
+    }
+
+    /*
+     * Update education record
+     */
+    public function updateEducation(UpdateEducationRequest $request, Education $education)
+    {
+        $validatedData = $request->validated();
+
+        if (!$request->has('currently_studying')) {
+            $validatedData['currently_studying'] = 0;
+        }
+
+        if ($validatedData['sort'] < 1) {
+            $validatedData['sort'] = 1;
+        }
+
+        $education->update($validatedData);
+
+        return back()->with('message', 'Education record updated successfully!');
     }
 }

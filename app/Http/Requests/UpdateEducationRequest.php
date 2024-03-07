@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Session;
 
-class StoreEducationRequest extends FormRequest
+class UpdateEducationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,10 @@ class StoreEducationRequest extends FormRequest
      */
     public function rules(): array
     {
+        $education = $this->route('education');
+
         return [
-            'title' => 'required|string|max:100|unique:education,title',
+            'title' => 'required|string|max:100|unique:education,title,'.$education->id,
             'institution' => 'required|string|max:100',
             'grade_type' => 'nullable|string|in:cgpa,percentage,grade',
             'grade' => 'nullable|string|max:50',
@@ -44,7 +46,7 @@ class StoreEducationRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         // Set the flash message
-        Session::flash('showAddEducationModel', true);
+        Session::flash('showEditEducationModel', true);
 
         // Redirect back with the flash message and old input
         $exception = $validator->getException();

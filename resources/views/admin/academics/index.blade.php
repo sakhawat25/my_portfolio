@@ -5,37 +5,37 @@
 
 @section('script')
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    var updateRoute = "{{ route('admin.academics.education.update', ':id') }}";
+</script>
 <script src="{{ asset('assets/admin/js/academics.js') }}"></script>
 @endsection
 
 @section('content')
         <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Education</strong>
         </div>
-        <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-2">
-            <div class="flex align-middle justify-between">
-                <strong class="text-xl uppercase md:text-lg">BSc (Computer Science)</strong>
-                <p class="text-xl md:text-lg">2017 - 2021</p>
-                <div class="flex gap-3">
-                    <button id="editEducationButton" class="outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit" data-target-url="{{ route('admin.academics.education.show', 1) }}">
-                        <i class="fa fa-pencil"></i>
-                    </button>
+        @foreach ($educations as $education)
+            <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-2">
+                <div class="flex align-middle justify-between">
+                    <strong class="text-xl uppercase md:text-lg">{{ $education->title }}</strong>
+                    <p class="text-xl md:text-lg">{{ $education->start_date }} - {{ $education->end_date ?? 'Present' }}</p>
+                    <div class="flex gap-3">
+                        <button id="editEducationButton" class="outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit" data-target-url="{{ route('admin.academics.education.show', $education->id) }}">
+                            <i class="fa fa-pencil"></i>
+                        </button>
 
-                    <button class="outline-none text-red-400 hover:text-red-500 focus:outline-none" title="Delete">
-                        <i class="fa fa-trash"></i>
-                    </button>
+                        <button class="outline-none text-red-400 hover:text-red-500 focus:outline-none" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="text-lg">{{ $education->institution }}</p>
+                <div>
+                    {!! $education->description !!}
                 </div>
             </div>
-            <p class="text-lg">University Of Sindh</p>
-            <div>
-                <p>Description:</p>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. A ab dolorem necessitatibus veniam expedita
-                    inventore nihil quaerat eius reprehenderit non, animi excepturi praesentium, aperiam illum asperiores
-                    cum
-                    et! Exercitationem, veritatis.
-                </p>
-            </div>
-        </div>
+        @endforeach
+
         <button onclick="addEducationModal.showModal()"
             class="bg-teal-400 float-right focus:outline-none hover:bg-teal-500 my-3 outline-none p-2 px-4 text-lg text-white">
             <i class="fa fa-plus"></i>
@@ -154,7 +154,8 @@
         <dialog id="editEducationModal" class="modal w-1/2 md:w-full" data-show-modal=@if(session()->has('showEditEducationModel')) {{ session('showEditEducationModel') }} @else {{ false }} @endif>
             <div class="modal-box p-6">
                 <div class="h6 mb-5 uppercase">Edit Education Record</div>
-                <form action="{{ route('admin.academics.education.store') }}" id="addEducationForm" method="POST">
+                <form id="editEducationForm" method="POST">
+                    @method('PUT')
                     @csrf
                     <div class="flex flex-col gap-3">
                         @error('title')
@@ -254,7 +255,7 @@
                         <button
                             class="bg-gray-500 text-white px-6 py-2 outline-none focus:outline-none hover:bg-gray-600">Close</button>
                     </form>
-                    <button form="addEducationForm" type="submit" class="bg-teal-400 text-white px-6 py-2 outline-none focus:outline-none hover:bg-teal-500">Add</button>
+                    <button form="editEducationForm" type="submit" class="bg-teal-400 text-white px-6 py-2 outline-none focus:outline-none hover:bg-teal-500">Update</button>
                 </div>
             </div>
         </dialog>
