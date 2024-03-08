@@ -44,8 +44,20 @@ $(document).ready(function () {
     }
 
     /*
-     * Show edit education modal on edit button click
+     * Show modals on add and edit
      */
+    $( "#addEducationButton" ).on('click', function(){
+        $("#addEducationModal").get(0).showModal()
+
+        tinymce.init({
+            selector: '#description',
+            plugins: 'lists',
+            menubar: false,
+            toolbar_mode: 'sliding',
+            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent',
+        });
+    });
+
     $("#editEducationButton").on("click", (event) => {
         const url = $(event.target).attr("data-target-url");
 
@@ -82,6 +94,14 @@ $(document).ready(function () {
                 });
 
                 $("#editEducationModal").get(0).showModal();
+
+                tinymce.init({
+                    selector: '#edit_description',
+                    plugins: 'lists',
+                    menubar: false,
+                    toolbar_mode: 'sliding',
+                    toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent',
+                });
             })
             .catch((error) => {
                 if (error.request.status === 404) {

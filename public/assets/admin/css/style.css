@@ -398,12 +398,12 @@ fieldset {
   padding: 0;
 }
 
-ol,
+/* ol,
 ul {
   list-style: none;
   margin: 0;
   padding: 0;
-}
+} */
 
 /**
  * Tailwind custom reset styles
@@ -812,7 +812,7 @@ body, h1, h2, h3, h4, h5, h6, p, a {
 p {
   letter-spacing: 0.05em;
   font-size: 0.875rem;
-  --text-opacity: 1;
+  /* --text-opacity: 1; */
   color: #a0aec0;
   color: rgba(160, 174, 192, var(--text-opacity))
 }

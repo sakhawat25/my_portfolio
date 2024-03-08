@@ -1,6 +1,7 @@
 @extends('admin.layout.app')
 
 @section('css')
+<script src="https://cdn.tiny.cloud/1/1qvedc8bwtfg6jqsy6i3g4tbrb6ga00kvjep7zztfu5sxlt8/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 @endsection
 
 @section('script')
@@ -36,7 +37,7 @@
             </div>
         @endforeach
 
-        <button onclick="addEducationModal.showModal()"
+        <button id="addEducationButton"
             class="bg-teal-400 float-right focus:outline-none hover:bg-teal-500 my-3 outline-none p-2 px-4 text-lg text-white">
             <i class="fa fa-plus"></i>
         </button>
