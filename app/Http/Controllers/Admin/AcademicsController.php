@@ -81,4 +81,14 @@ class AcademicsController extends Controller
 
         return back()->with('message', 'Education record updated successfully!');
     }
+
+    /*
+     * Delete education record
+     */
+    public function deleteEducation(Education $education)
+    {
+        $education->delete();
+
+        return back()->with('message', 'Education record deleted successfully!');
+    }
 }

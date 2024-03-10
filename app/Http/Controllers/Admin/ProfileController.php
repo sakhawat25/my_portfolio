@@ -12,9 +12,7 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
-
-        return view('admin.profile.index', compact('user'));
+        return view('admin.profile.index');
     }
 
     public function updateField(Request $request, $field)
@@ -33,7 +31,7 @@ class ProfileController extends Controller
                 break;
 
             case 'email':
-                $validationRules['email'] = 'required|email|unique:users,email,'.auth()->user()->id;
+                $validationRules['email'] = 'required|email|unique:users,email,' . auth()->user()->id;
                 break;
 
             case 'github_link':
@@ -118,7 +116,7 @@ class ProfileController extends Controller
 
         // Update
         $image = $request->file('image');
-        $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+        $imageName = time() . '_' . date('d-m-Y') . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images'), $imageName);
 
         return redirect()->back()->with('message', 'Your profile picture has been updated.');
@@ -139,21 +137,22 @@ class ProfileController extends Controller
         // User titles update
         $titles = json_decode($request->titles);
 
-        $titlesArray = [];
+        if ($validatedData['titles']) {
+            $titlesArray = [];
 
-        foreach ($titles as $title) {
-            array_push($titlesArray, $title->value);
+            foreach ($titles as $title) {
+                array_push($titlesArray, $title->value);
+            }
+            $titles = join(', ', $titlesArray);
+
+            $validatedData['titles'] = $titles;
         }
-
-        $titles = join(', ', $titlesArray);
-
-        $validatedData['titles'] = $titles;
 
         // Update cv
         if ($request->hasFile('cv')) {
             // Store cv
             $cv = $request->file('cv');
-            $fileName = uniqid().'.'.$cv->getClientOriginalExtension();
+            $fileName = uniqid() . '.' . $cv->getClientOriginalExtension();
             $cv->move(public_path('files'), $fileName);
             $validatedData['cv'] = $fileName;
 
@@ -168,10 +167,10 @@ class ProfileController extends Controller
             $imageData = base64_decode($base64_string);
 
             // Define the file name for the new image (you can customize the file name as needed)
-            $imageName = time().'_'.date('d-m-Y').'.png';
+            $imageName = time() . '_' . date('d-m-Y') . '.png';
 
             // Specify the path where you want to save the image
-            $path = public_path('images/'.$imageName);  // Example: 'images/new_image.png'
+            $path = public_path('images/' . $imageName);  // Example: 'images/new_image.png'
 
             // Save the image data to the specified path
             file_put_contents($path, $imageData);

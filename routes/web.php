@@ -38,5 +38,6 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         Route::post('/education', 'storeEducation')->name('admin.academics.education.store');
         Route::get('/education/{education}', 'showEducation')->name('admin.academics.education.show');
         Route::put('/education/{education}', 'updateEducation')->name('admin.academics.education.update');
+        Route::delete('/education/{education}', 'deleteEducation')->name('admin.academics.education.delete');
     });
 });

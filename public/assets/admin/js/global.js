@@ -1,7 +1,7 @@
-$(document).ready(function() {
+$(document).ready(function () {
     /*
-    * For closing flash messages
-    */
+     * For closing flash messages
+     */
     $closeErrorButton = $("#close-error-message-button");
 
     $closeErrorButton.on("click", (event) => {

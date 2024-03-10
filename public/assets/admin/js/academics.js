@@ -46,15 +46,16 @@ $(document).ready(function () {
     /*
      * Show modals on add and edit
      */
-    $( "#addEducationButton" ).on('click', function(){
-        $("#addEducationModal").get(0).showModal()
+    $("#addEducationButton").on("click", function () {
+        $("#addEducationModal").get(0).showModal();
 
         tinymce.init({
-            selector: '#description',
-            plugins: 'lists',
+            selector: "#description",
+            plugins: "lists",
             menubar: false,
-            toolbar_mode: 'sliding',
-            toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent',
+            toolbar_mode: "sliding",
+            toolbar:
+                "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent",
         });
     });
 
@@ -77,30 +78,34 @@ $(document).ready(function () {
                 $("#edit_sort").val(data.sort);
                 $("#edit_description").val(data.description);
 
-                $("#editEducationForm").attr('action', updateRoute.replace(':id', data.id));
+                $("#editEducationForm").attr(
+                    "action",
+                    updateRoute.replace(":id", data.id)
+                );
 
                 if (data.currently_studying) {
-                    $("#edit_currently_studying").prop('checked', true);
+                    $("#edit_currently_studying").prop("checked", true);
                     $("#edit_end_date_wrapper").hide();
                 } else {
-                    $("#edit_currently_studying").prop('checked', false);
+                    $("#edit_currently_studying").prop("checked", false);
                     $("#edit_end_date_wrapper").show();
                 }
 
-                $("#edit_grade_type > option").each(function() {
+                $("#edit_grade_type > option").each(function () {
                     if (this.value === data.grade_type) {
-                        $(this).prop("selected", true)
+                        $(this).prop("selected", true);
                     }
                 });
 
                 $("#editEducationModal").get(0).showModal();
 
                 tinymce.init({
-                    selector: '#edit_description',
-                    plugins: 'lists',
+                    selector: "#edit_description",
+                    plugins: "lists",
                     menubar: false,
-                    toolbar_mode: 'sliding',
-                    toolbar: 'undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent',
+                    toolbar_mode: "sliding",
+                    toolbar:
+                        "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent",
                 });
             })
             .catch((error) => {
@@ -110,11 +115,22 @@ $(document).ready(function () {
 
                     // show alert box
                     window.alert("Record not found!");
-
                 } else {
                     // Another error
                     console.log("Error: ", error);
                 }
             });
+    });
+
+    /*
+     * Delete education button
+     */
+    $(".deleteButton").click(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var confirmation = confirm("Are you sure?"); // Display confirmation dialog
+        if (confirmation) {
+            $(this).closest("form").submit(); // Submit the form if user confirms
+        }
     });
 });

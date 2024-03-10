@@ -146,6 +146,8 @@ $(document).ready(function () {
         const fileExtension = file.name.slice(index).toLowerCase();
         if ($.inArray(fileExtension, allowedFileExtensions) === -1) {
             alert("Only PDF format is allowed to update your CV!");
+            // Clear the file input
+            $cvImageInputElement.val("");
             return;
         }
 
@@ -153,6 +155,8 @@ $(document).ready(function () {
         const fileSizeMB = file.size / (1024 * 1024); // Convert bytes to MB
         if (fileSizeMB > maxFileSizeMB) {
             alert("File size exceeds the maximum limit of 1 MB!");
+            // Clear the file input
+            $cvImageInputElement.val("");
             return;
         }
 
