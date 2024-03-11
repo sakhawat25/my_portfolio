@@ -46,7 +46,7 @@ class UpdateEducationRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         // Set the flash message
-        Session::flash('showEditEducationModel', true);
+        Session::flash('showEditEducationModal', true);
 
         // Redirect back with the flash message and old input
         $exception = $validator->getException();

@@ -35,9 +35,21 @@ Route::middleware('auth')->prefix('admin')->group(function () {
      */
     Route::prefix('academics')->controller(AcademicsController::class)->group(function () {
         Route::get('/', 'index')->name('admin.academics');
-        Route::post('/education', 'storeEducation')->name('admin.academics.education.store');
-        Route::get('/education/{education}', 'showEducation')->name('admin.academics.education.show');
-        Route::put('/education/{education}', 'updateEducation')->name('admin.academics.education.update');
-        Route::delete('/education/{education}', 'deleteEducation')->name('admin.academics.education.delete');
+
+        // Education routes
+        Route::prefix('education')->group(function () {
+            Route::post('/', 'storeEducation')->name('admin.academics.education.store');
+            Route::get('/{education}', 'showEducation')->name('admin.academics.education.show');
+            Route::put('/{education}', 'updateEducation')->name('admin.academics.education.update');
+            Route::delete('/{education}', 'deleteEducation')->name('admin.academics.education.delete');
+        });
+
+        // Certificates routes
+        Route::prefix('certificates')->group(function () {
+            Route::post('/', 'storeCertificate')->name('admin.academics.certificate.store');
+            Route::get('/{certificate}', 'showCertificate')->name('admin.academics.certificate.show');
+            Route::put('/{certificate}', 'updateCertificate')->name('admin.academics.certificate.update');
+            Route::delete('/{certificate}', 'deleteCertificate')->name('admin.academics.certificate.delete');
+        });
     });
 });

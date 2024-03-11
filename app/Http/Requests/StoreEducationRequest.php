@@ -44,7 +44,7 @@ class StoreEducationRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         // Set the flash message
-        Session::flash('showAddEducationModel', true);
+        Session::flash('showAddEducationModal', true);
 
         // Redirect back with the flash message and old input
         $exception = $validator->getException();

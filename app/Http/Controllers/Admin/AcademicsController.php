@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreEducationRequest;
 use App\Http\Requests\UpdateEducationRequest;
+use App\Models\Certificate;
 use App\Models\Education;
 
 class AcademicsController extends Controller
@@ -14,8 +15,6 @@ class AcademicsController extends Controller
      */
     public function index()
     {
-        $user = auth()->user();
-
         $educations = Education::select(
             'id',
             'title',
@@ -30,9 +29,21 @@ class AcademicsController extends Controller
             ->orderBy('sort', 'ASC')
             ->get();
 
+        $certificates = Certificate::select(
+            'id',
+            'title',
+            'provider',
+            'issue_date',
+            'expiry_date',
+            'description',
+            'image',
+        )
+            ->orderBy('sort', 'ASC')
+            ->get();
+
         // $showModal = true;
 
-        return view('admin.academics.index', compact('user', 'educations'));
+        return view('admin.academics.index', compact('educations', 'certificates'));
     }
 
     /*
