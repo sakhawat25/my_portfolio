@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCertificateRequest;
 use App\Http\Requests\StoreEducationRequest;
+use App\Http\Requests\UpdateCertificateRequest;
 use App\Http\Requests\UpdateEducationRequest;
 use App\Models\Certificate;
 use App\Models\Education;
+use Illuminate\Support\Facades\File;
 
 class AcademicsController extends Controller
 {
@@ -101,5 +104,77 @@ class AcademicsController extends Controller
         $education->delete();
 
         return back()->with('message', 'Education record deleted successfully!');
+    }
+
+    /*
+     * For storing certificate redord
+     */
+    public function storeCertificate(StoreCertificateRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        if (empty($validatedData['sort'])) {
+            $validatedData['sort'] = 1;
+        } elseif ($validatedData['sort'] < 1) {
+            $validatedData['sort'] = 1;
+        }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        Certificate::create($validatedData);
+
+        return back()->with('message', 'Certificate record added successfully!');
+    }
+
+    /*
+     * For showing education redord (AJAX Request)
+     * return json response
+     */
+    public function showCertificate(Certificate $certificate)
+    {
+        return response()->json($certificate);
+    }
+
+    /*
+     * Update certificate record
+     */
+    public function updateCertificate(UpdateCertificateRequest $request, Certificate $certificate)
+    {
+        $validatedData = $request->validated();
+
+        if ($validatedData['sort'] < 1) {
+            $validatedData['sort'] = 1;
+        }
+
+        if ($request->hasFile('image')) {
+            // Delete previous image
+            if (File::exists(asset('images/'.$certificate->image))) {
+                File::delete(asset('images/'.$certificate->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        $certificate->update($validatedData);
+
+        return back()->with('message', 'Certificate record updated successfully!');
+    }
+
+    /*
+     * Delete certificate record
+     */
+    public function deleteCertificate(Certificate $certificate)
+    {
+        $certificate->delete();
+
+        return back()->with('message', 'Certificate record deleted successfully!');
     }
 }

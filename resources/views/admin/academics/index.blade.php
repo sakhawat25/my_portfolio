@@ -9,6 +9,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         var updateRoute = "{{ route('admin.academics.education.update', ':id') }}";
+        var updateCertificateRoute = "{{ route('admin.academics.certificate.update', ':id') }}";
+        var publicImageUrl = "{{ url('images') }}";
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="{{ asset('assets/admin/js/academics.js') }}"></script>
@@ -74,7 +76,7 @@
                             <i class="fa fa-pencil"></i>
                         </button>
 
-                        <form action="" method="POST">
+                        <form action="{{ route('admin.academics.certificate.delete', $certificate->id) }}" method="POST">
                             @method('DELETE')
                             @csrf
                             <button type="submit"
@@ -375,7 +377,8 @@
         data-show-modal=@if (session()->has('showAddCertificateModal')) {{ session('showAddCertificateModal') }} @else {{ false }} @endif>
         <div class="modal-box p-6">
             <div class="h6 mb-5 uppercase">Add Certificate Record</div>
-            <form action="{{ route('admin.academics.certificate.store') }}" id="addCertificateForm" method="POST">
+            <form action="{{ route('admin.academics.certificate.store') }}" id="addCertificateForm" method="POST"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-col gap-3">
                     @error('title')
@@ -416,7 +419,7 @@
                         <label
                             class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Expiry
                             Date</label>
-                        <input type="date" name="expiry_date" id="expiry_date" value="{{ old('issue_date') }}"
+                        <input type="date" name="expiry_date" id="expiry_date" value="{{ old('expiry_date') }}"
                             class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                     </div>
 
@@ -476,8 +479,121 @@
                     <button
                         class="bg-gray-500 text-white px-6 py-2 outline-none focus:outline-none hover:bg-gray-600">Close</button>
                 </form>
-                <button form="addEducationForm" type="submit"
+                <button form="addCertificateForm" type="submit"
                     class="bg-teal-400 text-white px-6 py-2 outline-none focus:outline-none hover:bg-teal-500">Add</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Modal to edit certificate record -->
+    <dialog id="editCertificateModal" class="modal w-1/2 md:w-full"
+        data-show-modal=@if (session()->has('showEditCertificateModal')) {{ session('showEditCertificateModal') }} @else {{ false }} @endif>
+        <div class="modal-box p-6">
+            <div class="h6 mb-5 uppercase">Edit Certificate Record</div>
+            <form id="editCertificateForm" method="POST" enctype="multipart/form-data">
+                @method('PUT')
+                @csrf
+                <div class="flex flex-col gap-3">
+                    @error('title')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+                    <div class="flex">
+                        <label
+                            class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Title&nbsp;*</label>
+                        <input type="text" name="title" id="edit_certificate_title" value="{{ old('title') }}"
+                            class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
+                    </div>
+
+                    @error('provider')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+                    <div class="flex">
+                        <label
+                            class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Institution&nbsp;*</label>
+                        <input type="text" name="provider" id="edit_provider" value="{{ old('provider') }}"
+                            class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
+                    </div>
+
+                    @error('issue_date')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+                    <div class="flex">
+                        <label
+                            class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Issue
+                            Date&nbsp;*</label>
+                        <input type="date" name="issue_date" id="edit_issue_date" value="{{ old('issue_date') }}"
+                            class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
+                    </div>
+
+                    @error('expiry_date')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+                    <div class="flex">
+                        <label
+                            class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Expiry
+                            Date</label>
+                        <input type="date" name="expiry_date" id="edit_expiry_date" value="{{ old('expiry_date') }}"
+                            class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
+                    </div>
+
+                    @error('sort')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+                    <div class="flex">
+                        <label
+                            class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Sort</label>
+                        <input type="number" name="sort" id="edit_certificate_sort" value="{{ old('sort') }}"
+                            class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
+                    </div>
+
+                    @error('image')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+
+                    <div class="flex">
+                        <label
+                            class="bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600">Certificate</label>
+                    </div>
+
+                    <div class="flex flex-col items-center pb-10 gap-2">
+                        <div class="flex justify-center">
+                            <div class="relative w-1/4 edit-certificate-container">
+                                <img id='edit-certificate-image' src="{{ asset('images/no-image.jpg') }}" alt="No image"
+                                    class="w-full" />
+                                <button id="edit-select-certificate-button"
+                                    class="hidden absolute bg-teal-400 inset-0 opacity-75 outline-none focus:outline-none"
+                                    title="Update Certificate">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <input type="file" name="image" id="edit-certificate-image-input" class="hidden">
+                            </div>
+                        </div>
+                        <button id="edit-view-certificate-button"
+                            class="bg-teal-400 py-2 px-10 text-white text-sm uppercase inset-0 outline-none focus:outline-none hover:bg-teal-500"
+                            title="View Certificate">View</button>
+                    </div>
+
+                    @error('description')
+                        <div class="normal-case text-red-500 text-sm font-medium mt-3">{{ $message }}</div>
+                    @enderror
+                    <div class="flex flex-col gap-2">
+                        <div class="flex">
+                            <label
+                                class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Description</label>
+                            <div class="w-full"></div>
+                        </div>
+                        <textarea name="description" id="edit_certificate_description" rows="10"
+                            class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">{{ old('description') }}</textarea>
+                    </div>
+                </div>
+            </form>
+            <div class="flex gap-2 modal-action mt-5">
+                <form method="dialog">
+                    <button
+                        class="bg-gray-500 text-white px-6 py-2 outline-none focus:outline-none hover:bg-gray-600">Close</button>
+                </form>
+                <button form="editCertificateForm" type="submit"
+                    class="bg-teal-400 text-white px-6 py-2 outline-none focus:outline-none hover:bg-teal-500">Update</button>
             </div>
         </div>
     </dialog>
