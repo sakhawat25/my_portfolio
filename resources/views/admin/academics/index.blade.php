@@ -21,7 +21,7 @@
     <div class="mb-24">
         <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Education</strong>
         </div>
-        @foreach ($educations as $education)
+        @forelse ($educations as $education)
             <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-2 mb-5">
                 <div class="flex align-middle justify-between">
                     <strong class="text-xl uppercase md:text-lg">{{ $education->title }}</strong>
@@ -53,7 +53,21 @@
                     {!! $education->description !!}
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-3 mb-5">
+                <div class="bg-gray-300 h-4 mb-2 rounded-full w-56">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+            </div>
+        @endforelse
+
 
         <button id="addEducationButton"
             class="bg-teal-400 float-right focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 text-lg text-white">
@@ -65,7 +79,7 @@
     <div class="mb-24">
         <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Certificates</strong>
         </div>
-        @foreach ($certificates as $certificate)
+        @forelse ($certificates as $certificate)
             <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-4 mb-5">
                 <div class="flex align-middle justify-between">
                     <strong class="text-xl uppercase md:text-lg">{{ $certificate->title }}</strong>
@@ -129,9 +143,21 @@
                         <img src="{{ asset('images/no-image.jpg') }}" alt="No image" class="h-full object-contain w-full">
                     @endif
                 </div>
-
             </div>
-        @endforeach
+        @empty
+            <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-3 mb-5">
+                <div class="bg-gray-300 h-4 mb-2 rounded-full w-56">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+            </div>
+        @endforelse
 
         <button id="addCertificateButton"
             class="bg-teal-400 float-right focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 text-lg text-white mb-5">
