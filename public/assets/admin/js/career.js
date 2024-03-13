@@ -128,4 +128,19 @@ $(document).ready(function() {
             $(this).closest("form").submit(); // Submit the form if user confirms
         }
     });
+
+    /*
+     * For skills input box on career page
+     */
+    const inputElements = $(".tagify");
+
+    inputElements.each(
+        (index, input) =>
+            new Tagify(input, {
+                transformTag: function (tagData) {
+                    tagData.style =
+                        "--tag-bg:#4fd1c5;--tag-text-color:#fff;--tag-hover:#38b2ac;--tag-remove-btn-color:#fff;";
+                },
+            })
+    );
 });

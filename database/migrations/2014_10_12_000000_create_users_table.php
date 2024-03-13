@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class() extends Migration {
     /**
      * Run the migrations.
      */
@@ -24,6 +23,7 @@ return new class extends Migration
             $table->string('facebook_link', 150)->nullable();
             $table->string('twitter_link', 150)->nullable();
             $table->string('titles', 200)->nullable();
+            $table->text('skills')->nullable();
             $table->string('cv', 100)->nullable();
             $table->string('cv_image', 100)->nullable();
             $table->string('address', 200)->nullable();

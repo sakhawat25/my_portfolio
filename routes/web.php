@@ -67,5 +67,10 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::put('/{experience}', 'updateExperience')->name('admin.career.experience.update');
             Route::delete('/{experience}', 'deleteExperience')->name('admin.career.experience.delete');
         });
+
+        // Skills routes
+        Route::prefix('skills')->group(function () {
+            Route::put('/{user}', 'updateSkills')->name('admin.career.skills.update');
+        });
     });
 });

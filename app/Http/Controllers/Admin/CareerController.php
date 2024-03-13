@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExperienceRequest;
 use App\Http\Requests\UpdateExperienceRequest;
 use App\Models\Experience;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class CareerController extends Controller
 {
@@ -84,5 +86,30 @@ class CareerController extends Controller
         $experience->delete();
 
         return back()->with('message', 'Experience record deleted successfully!');
+    }
+
+    public function updateSkills(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'skills' => 'nullable|string',
+        ]);
+
+        // User skills update
+        $skills = json_decode($request->skills);
+
+        if ($validatedData['skills']) {
+            $skillsArray = [];
+
+            foreach ($skills as $skill) {
+                array_push($skillsArray, $skill->value);
+            }
+            $skills = join(', ', $skillsArray);
+
+            $validatedData['skills'] = $skills;
+        }
+
+        $user->update($validatedData);
+
+        return back()->with('message', 'Skills saved successfully!');
     }
 }

@@ -3,6 +3,9 @@
 @section('css')
     <script src="https://cdn.tiny.cloud/1/1qvedc8bwtfg6jqsy6i3g4tbrb6ga00kvjep7zztfu5sxlt8/tinymce/6/tinymce.min.js"
         referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.polyfills.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('script')
@@ -64,7 +67,8 @@
                             Expiry Date
                         </label>
                         <div class="border-2 border-teal-400 px-2 py-1">
-                            {{ !empty($experience->end_date) ? \Carbon\Carbon::parse($experience->end_date)->format('M Y') : 'Currently Working' }}</div>
+                            {{ !empty($experience->end_date) ? \Carbon\Carbon::parse($experience->end_date)->format('M Y') : 'Currently Working' }}
+                        </div>
                     </div>
                 </div>
 
@@ -72,25 +76,44 @@
                     {!! $experience->description !!}
                 </div>
             </div>
-            @empty
-                <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-3 mb-5">
-                    <div class="bg-gray-300 h-4 mb-2 rounded-full w-56">
-                    </div>
-                    <div class="bg-gray-300 h-3 rounded-full">
-                    </div>
-                    <div class="bg-gray-300 h-3 rounded-full">
-                    </div>
-                    <div class="bg-gray-300 h-3 rounded-full">
-                    </div>
-                    <div class="bg-gray-300 h-3 rounded-full">
-                    </div>
+        @empty
+            <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-3 mb-5">
+                <div class="bg-gray-300 h-4 mb-2 rounded-full w-56">
                 </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+                <div class="bg-gray-300 h-3 rounded-full">
+                </div>
+            </div>
         @endforelse
 
         <button id="addExperienceButton"
             class="bg-teal-400 float-right focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 text-lg text-white mb-5">
             <i class="fa fa-plus"></i>
         </button>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="mb-24">
+        <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Skills</strong>
+        </div>
+        <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-4 mb-5">
+            <form action="{{ route('admin.career.skills.update', $user->id) }}" method="post" id="updateSkillsForm">
+                @method('PUT')
+                @csrf
+                <input type="text" name="skills"
+                class="tagify w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
+                value="{{ old('skills') ?? $user->skills }}" placeholder="PHP, Laravel, CSS"/>
+            </form>
+            <button id="saveSkillsButton" form="updateSkillsForm"
+                class="bg-teal-400 focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 self-end text-lg text-white">
+                Save
+            </button>
+        </div>
     </div>
 
     <!-- Modal to add experience record -->
@@ -208,7 +231,8 @@
                     <div class="flex">
                         <label
                             class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Organization&nbsp;*</label>
-                        <input type="text" name="organization" id="edit_organization" value="{{ old('organization') }}"
+                        <input type="text" name="organization" id="edit_organization"
+                            value="{{ old('organization') }}"
                             class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                     </div>
 
