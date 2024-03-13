@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AcademicsController;
+use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\WebHomeController;
@@ -50,6 +51,21 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::get('/{certificate}', 'showCertificate')->name('admin.academics.certificate.show');
             Route::put('/{certificate}', 'updateCertificate')->name('admin.academics.certificate.update');
             Route::delete('/{certificate}', 'deleteCertificate')->name('admin.academics.certificate.delete');
+        });
+    });
+
+    /*
+     * Routes for career in admin panel
+     */
+    Route::prefix('career')->controller(CareerController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.career');
+
+        // Experience routes
+        Route::prefix('experiences')->group(function () {
+            Route::post('/', 'storeExperience')->name('admin.career.experience.store');
+            Route::get('/{experience}', 'showExperience')->name('admin.career.experience.show');
+            Route::put('/{experience}', 'updateExperience')->name('admin.career.experience.update');
+            Route::delete('/{experience}', 'deleteExperience')->name('admin.career.experience.delete');
         });
     });
 });

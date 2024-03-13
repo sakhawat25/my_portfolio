@@ -362,7 +362,7 @@
 
                 <!-- link -->
                 <a href="{{ route('admin.dashboard') }}"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 @if (request()->route()->getName() === 'admin.dashboard') active @endif">
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 px-3 @if (request()->route()->getName() === 'admin.dashboard') active @endif">
                     <i class="fad fa-chart-pie text-xs mr-2"></i>
                     Dashboard
                 </a>
@@ -370,7 +370,7 @@
 
                 <!-- link -->
                 <a href="{{ route('admin.profile') }}"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 @if (request()->route()->getName() === 'admin.profile') active @endif">
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 px-3 @if (request()->route()->getName() === 'admin.profile') active @endif">
                     <i class="fad fa-envelope-open-text text-xs mr-2"></i>
                     Profile
                 </a>
@@ -378,15 +378,15 @@
 
                 <!-- link -->
                 <a href="{{ route('admin.academics') }}"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 @if (request()->route()->getName() === 'admin.academics') active @endif">
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 px-3 @if (request()->route()->getName() === 'admin.academics') active @endif">
                     <i class="fad fa-comments text-xs mr-2"></i>
                     Academics
                 </a>
                 <!-- end link -->
 
                 <!-- link -->
-                <a href="#"
-                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <a href="{{ route('admin.career') }}"
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 px-3 @if (request()->route()->getName() === 'admin.career') active @endif">
                     <i class="fad fa-shield-check text-xs mr-2"></i>
                     Career
                 </a>
