@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AcademicsController;
 use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\WebHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -73,4 +74,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
             Route::put('/{user}', 'updateSkills')->name('admin.career.skills.update');
         });
     });
+
+    /*
+     * Routes for projects in admin panel
+     */
+    Route::resource('/projects', ProjectsController::class);
 });

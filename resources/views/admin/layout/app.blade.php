@@ -391,6 +391,14 @@
                     Career
                 </a>
                 <!-- end link -->
+
+                <!-- link -->
+                <a href="{{ route('projects.index') }}"
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 px-3 @if (request()->route()->getName() === 'projects.index') active @endif">
+                    <i class="fad fa-project-diagram text-xs mr-2"></i>
+                    Projects
+                </a>
+                <!-- end link -->
             </div>
             <!-- end sidebar content -->
         </div>
