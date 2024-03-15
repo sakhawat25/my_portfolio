@@ -26,6 +26,7 @@ class ProjectsController extends Controller
      */
     public function create()
     {
+        return view('admin.projects.add');
     }
 
     /**
@@ -66,6 +67,7 @@ class ProjectsController extends Controller
     private function getProjects($search = null)
     {
         $query = Project::select(
+            'id',
             'title',
             'organization',
             'image',
