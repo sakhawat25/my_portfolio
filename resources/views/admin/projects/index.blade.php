@@ -67,9 +67,9 @@
                                     <td class="whitespace-nowrap  px-6 py-4">
                                         <div
                                             class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
-                                            <input type="checkbox" name="toggle" id="toggle"
+                                            <input type="checkbox" name="status" id="toggle{{ $project->id }}"
                                                 class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer" />
-                                            <label for="toggle"
+                                            <label for="toggle{{ $project->id }}"
                                                 class="bg-gray-400 block cursor-pointer h-6 overflow-hidden rounded-full toggle-label"></label>
                                         </div>
                                     </td>

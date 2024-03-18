@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
 {
@@ -34,6 +35,36 @@ class ProjectsController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        $validatedData = $request->validated();
+
+        // Extract tags if present
+        if ($validatedData['tags']) {
+            $tags = json_decode($request->tags);
+            $tagsArray = [];
+
+            foreach ($tags as $tag) {
+                array_push($tagsArray, $tag->value);
+            }
+            $tags = join(', ', $tagsArray);
+
+            $validatedData['tags'] = $tags;
+        }
+
+        // Upload image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        // Create slug
+        $slug = Str::slug($validatedData['title']);
+        $validatedData['slug'] = $slug;
+
+        Project::create($validatedData);
+
+        return redirect()->route('projects.index')->with('message', 'Record added successfully!');
     }
 
     /**
