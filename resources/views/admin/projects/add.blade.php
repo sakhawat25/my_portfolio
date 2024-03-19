@@ -9,7 +9,7 @@
 @endsection
 
 @section('script')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <script src="{{ asset('assets/admin/js/projects.js') }}"></script>
 @endsection
 
@@ -39,7 +39,8 @@
                     <label
                         class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Title&nbsp;*</label>
                     <input type="text" name="title" id="title" value="{{ old('title') }}"
-                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900" placeholder="Enter Title">
+                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
+                        placeholder="Enter Title">
                 </div>
 
                 @error('organization')
@@ -49,7 +50,8 @@
                     <label
                         class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Organization&nbsp;*</label>
                     <input type="text" name="organization" id="organization" value="{{ old('organization') }}"
-                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900" placeholder="Enter Organization">
+                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
+                        placeholder="Enter Organization">
                 </div>
 
                 @error('tags')
@@ -73,7 +75,8 @@
                     <label
                         class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Category&nbsp;*</label>
                     <input type="text" name="category" id="category" value="{{ old('category') }}"
-                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900" placeholder="Enter Category">
+                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
+                        placeholder="Enter Category">
                 </div>
 
                 @error('website')
@@ -83,7 +86,8 @@
                     <label
                         class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Website</label>
                     <input type="text" name="website" id="website" value="{{ old('website') }}"
-                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900" placeholder="https://www.example.com">
+                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
+                        placeholder="https://www.example.com">
                 </div>
 
                 @error('start_date')
@@ -91,7 +95,8 @@
                 @enderror
                 <div class="flex h-10">
                     <label
-                        class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Start Date&nbsp;*</label>
+                        class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">Start
+                        Date&nbsp;*</label>
                     <input type="date" name="start_date" id="start_date" value="{{ old('start_date') }}"
                         class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                 </div>
@@ -101,7 +106,8 @@
                 @enderror
                 <div class="flex h-10">
                     <label
-                        class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">End Date&nbsp;*</label>
+                        class="w-1/3 bg-teal-400 inline-block rounded-none px-6 py-2 text-xs font-medium uppercase leading-normal text-white transition duration-150 ease-in-out hover:border-primary-600 md:w-1/2">End
+                        Date&nbsp;*</label>
                     <input type="date" name="end_date" id="end_date" value="{{ old('end_date') }}"
                         class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900">
                 </div>
@@ -116,7 +122,21 @@
                         <div class="w-full"></div>
                     </div>
                     <textarea name="description" id="description" rows="10"
-                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900" placeholder="Enter project description...">{{ old('description') }}</textarea>
+                        class="border border-teal-400 outline-none w-full bg-transparent px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium transition duration-200 ease-in-out focus:outline-none focus:border-teal-500 focus-text-gray-900"
+                        placeholder="Enter project description...">{{ old('description') }}</textarea>
+                    <script>
+                        /*
+                         * Populate tinymce with description input element
+                         */
+                        tinymce.init({
+                            selector: "#description",
+                            plugins: "lists",
+                            menubar: false,
+                            statusbar: false,
+                            toolbar_mode: "sliding",
+                            toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent",
+                        });
+                    </script>
                 </div>
 
                 @error('image')
@@ -132,9 +152,8 @@
                     <div class="flex flex-col items-center pb-10 gap-2">
                         <div class="flex justify-center">
                             <div class="relative w-1/4 project-image-container">
-                                <img id='project-image'
-                                    src="{{ asset('images/no-image.jpg') }}"
-                                    alt="project image" class="w-full" />
+                                <img id='project-image' src="{{ asset('images/no-image.jpg') }}" alt="project image"
+                                    class="w-full" />
                                 <button id="select-image-button"
                                     class="hidden absolute bg-teal-400 inset-0 opacity-75 outline-none focus:outline-none"
                                     title="Upload image">

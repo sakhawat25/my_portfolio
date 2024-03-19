@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class ProjectsController extends Controller
@@ -79,6 +81,7 @@ class ProjectsController extends Controller
      */
     public function edit(Project $project)
     {
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
@@ -86,6 +89,37 @@ class ProjectsController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        $validatedData = $request->validated();
+
+        // Extract tags if present
+        if ($validatedData['tags']) {
+            $tags = json_decode($request->tags);
+            $tagsArray = [];
+
+            foreach ($tags as $tag) {
+                array_push($tagsArray, $tag->value);
+            }
+            $tags = join(', ', $tagsArray);
+
+            $validatedData['tags'] = $tags;
+        }
+
+        // Update image
+        if ($request->hasFile('image')) {
+            // Delete old image
+            if ($project->image !== 'no-image.jpg' && File::exists(public_path('images/'.$project->image))) {
+                File::delete(public_path('images/'.$project->image));
+            }
+
+            $image = $request->file('image');
+            $imageName = time().'_'.date('d-m-Y').'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = $imageName;
+        }
+
+        $project->update($validatedData);
+
+        return redirect()->route('projects.index')->with('message', 'Record updated successfully!');
     }
 
     /**
@@ -93,6 +127,14 @@ class ProjectsController extends Controller
      */
     public function destroy(Project $project)
     {
+        // Delete project image
+        if ($project->image !== 'no-image.jpg' && File::exists(public_path('images/'.$project->image))) {
+            File::delete(public_path('images/'.$project->image));
+        }
+
+        $project->delete();
+
+        return redirect()->route('projects.index')->with('message', 'Record deleted successfully!');
     }
 
     private function getProjects($search = null)
@@ -117,5 +159,12 @@ class ProjectsController extends Controller
         $projects = $query->paginate(10);
 
         return $projects;
+    }
+
+    public function updateStatus(Request $request, Project $project)
+    {
+        $request->validate([
+            'status' => 'required|integer|in:0,1',
+        ]);
     }
 }

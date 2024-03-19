@@ -75,16 +75,13 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="align-middle flex gap-2 justify-center">
-                                            <a href="{{ route('projects.show', $project->id) }}" title="show">
-                                                <i class="fa-eye fa px-1 text-lg text-teal-400 hover:text-teal-500"></i>
-                                            </a>
                                             <a href="{{ route('projects.edit', $project->id) }}" title="edit">
                                                 <i class="fa-pencil fa px-1 text-lg text-blue-400 hover:text-blue-500"></i>
                                             </a>
                                             <form action="{{ route('projects.destroy', $project->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
-                                                <button type="submit" title="Delete">
+                                                <button type="submit" title="Delete" class="focus:outline-none deleteProjectButton">
                                                     <i class="fa-trash fa text-lg text-red-500 hover:text-red-600"></i>
                                                 </button>
                                             </form>

@@ -1,18 +1,5 @@
 $(document).ready(function() {
     /*
-     * Populate tinymce with description input element
-     */
-    tinymce.init({
-        selector: "#description",
-        plugins: "lists",
-        menubar: false,
-        statusbar: false,
-        toolbar_mode: "sliding",
-        toolbar:
-            "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify bullist numlist | outdent indent",
-    });
-
-    /*
      * For tages input box on add project page
      */
     const inputElements = $(".tagify");
@@ -82,5 +69,21 @@ $(document).ready(function() {
             $("#project-image").attr("src", imageUrl);
         };
         reader.readAsDataURL(file);
+    });
+
+    /*
+     * Delete project button
+     */
+    $(".deleteProjectButton").click(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var confirmation = confirm("Are you sure?"); // Display confirmation dialog
+        if (confirmation) {
+            $(this).closest("form").submit(); // Submit the form if user confirms
+        }
+    });
+
+    $("input[name='status']").click((event) => {
+        console.log('Status button clicked.');
     });
 });
