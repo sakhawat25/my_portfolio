@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,7 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
     }
 
     /**
@@ -20,12 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Share authenticated user with every view
+        // Share user with every view
         View::composer('*', function ($view) {
-            // Retrieve authenticated user
-            $user = auth()->user();
+            // Retrieve user
+            $user = User::first();
 
-            // Pass authenticated user to the view
+            // Pass user to the view
             $view->with('user', $user);
         });
     }

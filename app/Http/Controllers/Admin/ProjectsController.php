@@ -163,8 +163,10 @@ class ProjectsController extends Controller
 
     public function updateStatus(Request $request, Project $project)
     {
-        $request->validate([
+        $data = $request->validate([
             'status' => 'required|integer|in:0,1',
         ]);
+
+        $project->update($data);
     }
 }

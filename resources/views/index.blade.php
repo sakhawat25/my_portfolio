@@ -95,22 +95,21 @@
             <div class="row">
                 <div class="col-md-4 valign">
                     <a href="#0" class="logo icon-img-60">
-                        <img src="assets/imgs/logo-light.png" alt="">
+                        <img src="{{ asset('assets/admin/img/logo02.png') }}" alt="">
                     </a>
                 </div>
                 <div class="col-md-4 valign">
                     <div class="social text-center full-width">
-                        <a href="#0"><i class="fab fa-behance"></i></a>
                         <a href="#0"><i class="fab fa-github"></i></a>
                         <a href="#0"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#0"><i class="fab fa-dribbble"></i></a>
+                        <a href="#0"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="col-md-4 valign">
                     <div class="full-width info">
                         <div class="d-flex justify-content-end">
                             <a href="mailto:abc@example.com">
-                                <span class="sub-title fz-12">Gavi@website.com</span>
+                                <span class="sub-title fz-12">{{ $user->email }}</span>
                             </a>
                         </div>
                     </div>
@@ -144,14 +143,13 @@
                                 </span>
                             </div>
                             <div class="info text-center mt-30">
-                                <h5>Pablo Gavi</h5>
-                                <p class="fz-13 text-u">Available For Freelance</p>
+                                <h5>{{ $user->first_name }} {{ $user->last_name }}</h5>
+                                <p class="fz-13 text-u">{{ $user->titles }}</p>
                             </div>
                             <div class="social text-center mt-20">
-                                <a href="#0"><i class="fab fa-behance"></i></a>
                                 <a href="#0"><i class="fab fa-github"></i></a>
                                 <a href="#0"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#0"><i class="fab fa-dribbble"></i></a>
+                                <a href="#0"><i class="fab fa-twitter"></i></a>
                             </div>
                         </div>
                     </div>
@@ -197,7 +195,7 @@
                     <!-- navbar links -->
                     <ul class="navbar-nav main-bg d-flex justify-content-end">
                         <li class="nav-item">
-                            <a href="#0" data-scroll-nav="0"><span>Home</span></a>
+                            <a href="{{ route('homepage') }}" data-scroll-nav="0"><span>Home</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="#0" data-scroll-nav="1"><span>Services</span></a>
@@ -600,7 +598,7 @@
 
 
             <!-- ==================== Start Testimonials ==================== -->
-            <div class="sec-box testimonials section-padding">
+            {{-- <div class="sec-box testimonials section-padding">
                 <div class="pad-left">
                     <div class="sec-head mb-80 wow fadeInUp">
                         <div class="row">
@@ -796,12 +794,12 @@
                 <span class="icon-qoute">
                     <i class="fas fa-quote-left"></i>
                 </span>
-            </div>
+            </div> --}}
             <!-- ==================== End Testimonials ==================== -->
 
 
             <!-- ==================== Start price ==================== -->
-            <div class="sec-box price section-padding" data-scroll-index="4">
+            {{-- <div class="sec-box price section-padding" data-scroll-index="4">
                 <div class="sec-head mb-80 wow fadeInUp">
                     <div class="row justify-content-center">
                         <div class="col-lg-6 text-center">
@@ -910,7 +908,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- ==================== End price ==================== -->
 
 
@@ -995,7 +993,7 @@
 
 
             <!-- ==================== Start Blog ==================== -->
-            <div class="sec-box blog section-padding bord-thin-top" data-scroll-index="6">
+            {{-- <div class="sec-box blog section-padding bord-thin-top" data-scroll-index="6">
                 <div class="sec-head mb-80">
                     <div class="row">
                         <div class="col-lg-6 wow fadeInUp">
@@ -1106,7 +1104,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- ==================== End Blog ==================== -->
 
         </section>

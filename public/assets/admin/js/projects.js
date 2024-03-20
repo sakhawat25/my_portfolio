@@ -84,6 +84,25 @@ $(document).ready(function() {
     });
 
     $("input[name='status']").click((event) => {
-        console.log('Status button clicked.');
+        const url = $(event.target).attr("data-target-url");
+
+        const data = {};
+
+        if ($(event.target)[0].checked) {
+           data.status = 1;
+        } else {
+            data.status = 0;
+        }
+
+        axios
+            .post(url, data)
+            .then((response) => {
+                // Successful request
+                console.log("Request is successful.");
+            })
+            .catch((error) => {
+                // Successful request
+                console.log("Request is unsuccessful.");
+            });
     });
 });

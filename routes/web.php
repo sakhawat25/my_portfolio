@@ -79,4 +79,5 @@ Route::middleware('auth')->prefix('admin')->group(function () {
      * Routes for projects in admin panel
      */
     Route::resource('/projects', ProjectsController::class);
+    Route::post('/update-status/{project}', [ProjectsController::class, 'updateStatus'])->name('projects.update-status');
 });
