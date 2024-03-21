@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExperienceRequest;
 use App\Http\Requests\UpdateExperienceRequest;
 use App\Models\Experience;
+use App\Models\TechnicalSkill;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,15 @@ class CareerController extends Controller
             ->orderBy('sort', 'ASC')
             ->get();
 
-        return view('admin.career.index', compact('experiences'));
+        $technicalSkills = TechnicalSkill::select(
+            'id',
+            'name',
+            'level',
+        )
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        return view('admin.career.index', compact('experiences', 'technicalSkills'));
     }
 
     /*

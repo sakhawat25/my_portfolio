@@ -99,20 +99,63 @@
 
     <!-- Skills Section -->
     <div class="mb-24">
-        <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Skills</strong>
+        <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Soft Skills</strong>
         </div>
         <div class="w-full px-3 py-4 bg-white border border-gray-300 shadow-md flex flex-col gap-4 mb-5">
             <form action="{{ route('admin.career.skills.update', $user->id) }}" method="post" id="updateSkillsForm">
                 @method('PUT')
                 @csrf
                 <input type="text" name="skills"
-                class="tagify w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
-                value="{{ old('skills') ?? $user->skills }}" placeholder="PHP, Laravel, CSS"/>
+                    class="tagify w-full relative m-0 my-2 -ml-0.5 block flex-auto border border-solid border-teal-400 bg-transparent bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-gray-800 text-sm font-medium outline-none transition duration-200 ease-in-out focus:border-teal-500 focus:text-gray-900 focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
+                    value="{{ old('skills') ?? $user->skills }}" placeholder="PHP, Laravel, CSS" />
             </form>
             <button id="saveSkillsButton" form="updateSkillsForm"
                 class="bg-teal-400 focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 self-end text-lg text-white">
                 Save
             </button>
+        </div>
+    </div>
+
+    <div class="mb-24">
+        <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Technical
+                Skills</strong>
+        </div>
+        <div class="bg-white border border-gray-300 flex flex-wrap gap-4 mb-5 px-3 py-4 shadow-md w-full">
+            @forelse ($technicalSkills as $technicalSkill)
+                <form action="{{ route('admin.career.skills.update', $user->id) }}" method="post" id="updateSkillsForm"
+                    class="w-1/2">
+                    @method('PUT')
+                    @csrf
+                    <div class="align-middle flex gap-3">
+                        <input type="text" name="name" id="skill-name{{ $technicalSkill->id }}"
+                            class="border border-teal-400 focus:border-teal-500 focus:outline-none font-normal px-3" value="{{ $technicalSkill->name }}" disabled />
+                        <div class="border border-teal-400 flex">
+                            <input type="text" name="level" id="skill-level{{ $technicalSkill->id }}"
+                                class="border border-teal-400 focus:border-teal-500 focus:outline-none font-normal px-3 w-20" value="{{ $technicalSkill->level }}" disabled />
+                            <div class="bg-gray-300 font-bold pt-2 px-2">%</div>
+                        </div>
+
+                        <button type="submit" form="updateSkillsForm" title="Update"
+                            class="update-btn bg-teal-400 focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 self-end text-lg text-white hidden">
+                            <i class="fa fa-check"></i>
+                        </button>
+                        <button title="Edit" data-name-input-id="skill-name{{ $technicalSkill->id }}" data-level-input-id="skill-level{{ $technicalSkill->id }}"
+                            class="edit-btn bg-yellow-600 focus:outline-none hover:bg-yellow-700 outline-none p-2 px-4 self-end text-lg text-white">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button title="Cancel" data-name-input-id="skill-name{{ $technicalSkill->id }}" data-level-input-id="skill-level{{ $technicalSkill->id }}"
+                            class="cancel-btn bg-yellow-600 focus:outline-none hover:bg-yellow-700 outline-none p-2 px-4 self-end text-lg text-white hidden">
+                            <i class="fa fa-times"></i>
+                        </button>
+                        <button id="deleteTechnicalSkillButton" title="Delete"
+                            class="bg-red-600 focus:outline-none hover:bg-red-700 outline-none p-2 px-4 self-end text-lg text-white">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </form>
+            @empty
+                No technical skill found!
+            @endforelse
         </div>
     </div>
 

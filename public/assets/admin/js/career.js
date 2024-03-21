@@ -143,4 +143,50 @@ $(document).ready(function() {
                 },
             })
     );
+
+    /*
+     * Edit Technical Skill
+     */
+    $(".edit-btn").click((event) => {
+        event.preventDefault();
+        const $clickedButton = $(event.target);
+        const $nameInputElement = $("#" + $clickedButton.data("name-input-id"));
+        const $levelInputElement = $("#" + $clickedButton.data("level-input-id"));
+        const $updateButton = $clickedButton.prev(".update-btn");
+        const $cancelButton = $clickedButton.next(".cancel-btn");
+
+        // Temporarily remove content, focus, then append it back
+        let currentValue = $nameInputElement.val();
+        $nameInputElement.val("").prop("disabled", false).val(currentValue).focus();
+
+        currentValue = $levelInputElement.val();
+        $levelInputElement.val("").prop("disabled", false).val(currentValue);
+
+        $clickedButton.hide();
+        $updateButton.show();
+        $cancelButton.show();
+    });
+
+    /*
+     * Reset Editable Technical Skill Box
+     */
+    $(".cancel-btn").click((event) => {
+        event.preventDefault();
+        const $clickedButton = $(event.target);
+        const $nameInputElement = $("#" + $clickedButton.data("name-input-id"));
+        const $levelInputElement = $("#" + $clickedButton.data("level-input-id"));
+        const $updateButton = $clickedButton.siblings(".update-btn");
+        const $editButton = $clickedButton.siblings(".edit-btn");
+
+        // Temporarily remove content, focus, then append it back
+        let currentValue = $nameInputElement.val();
+        $nameInputElement.val("").prop("disabled", true).val(currentValue).focus();
+
+        currentValue = $levelInputElement.val();
+        $levelInputElement.val("").prop("disabled", true).val(currentValue);
+
+        $clickedButton.hide();
+        $updateButton.hide();
+        $editButton.show();
+    });
 });
