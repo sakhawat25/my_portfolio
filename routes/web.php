@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\WebHomeController;
+use App\Models\TechnicalSkill;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,6 +73,11 @@ Route::middleware('auth')->prefix('admin')->group(function () {
         // Skills routes
         Route::prefix('skills')->group(function () {
             Route::put('/{user}', 'updateSkills')->name('admin.career.skills.update');
+        });
+
+        // Technical skills routes
+        Route::prefix('tech-skills')->group(function () {
+            Route::put('/{technicalSkill}/update', 'updateTechSkill')->name('admin.career.tech-skills.update');
         });
     });
 

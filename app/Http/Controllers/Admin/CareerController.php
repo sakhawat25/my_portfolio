@@ -9,6 +9,7 @@ use App\Models\Experience;
 use App\Models\TechnicalSkill;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CareerController extends Controller
 {
@@ -120,5 +121,33 @@ class CareerController extends Controller
         $user->update($validatedData);
 
         return back()->with('message', 'Skills saved successfully!');
+    }
+
+    /*
+     * For updating technical skill through AJAX request
+     */
+    public function updateTechSkill(Request $request, TechnicalSkill $technicalSkill)
+    {
+        $validationRules = [
+            'name' => 'required|string|unique:technical_skills,name,id',
+            'level' => 'nullable|integer',
+        ];
+
+        $validator = Validator::make($request->all(), $validationRules);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()->toJson()], 400);
+        }
+
+        // Update record
+        $technicalSkill->update($request->all());
+
+        // Prepare successful response
+        $response = [
+            'success' => true,
+            'message' => 'Record updated successfully',
+        ];
+
+        return response()->json($response);
     }
 }

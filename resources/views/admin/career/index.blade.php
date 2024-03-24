@@ -116,34 +116,47 @@
         </div>
     </div>
 
+    <!-- Technical Skills Section -->
     <div class="mb-24">
         <div class="bg-teal-400 inline-block text-center text-white py-3 px-5 mb-5 uppercase"><strong>Technical
                 Skills</strong>
         </div>
         <div class="bg-white border border-gray-300 flex flex-wrap gap-4 mb-5 px-3 py-4 shadow-md w-full">
             @forelse ($technicalSkills as $technicalSkill)
-                <form action="{{ route('admin.career.skills.update', $user->id) }}" method="post" id="updateSkillsForm"
-                    class="w-1/2">
+                <form action="{{ route('admin.career.tech-skills.update', $technicalSkill->id) }}" method="POST"
+                    class="w-1/2" id="tech-skill-update-form{{ $technicalSkill->id }}">
                     @method('PUT')
                     @csrf
+                    <div>
+                        <ul class="hidden mb-2 normal-case pl-5 text-red-600" id="errors-list{{ $technicalSkill->id }}">
+                        </ul>
+                    </div>
                     <div class="align-middle flex gap-3">
                         <input type="text" name="name" id="skill-name{{ $technicalSkill->id }}"
-                            class="border border-teal-400 focus:border-teal-500 focus:outline-none font-normal px-3" value="{{ $technicalSkill->name }}" disabled />
+                            class="border border-teal-400 focus:border-teal-500 focus:outline-none font-normal px-3"
+                            value="{{ $technicalSkill->name }}" disabled />
                         <div class="border border-teal-400 flex">
                             <input type="text" name="level" id="skill-level{{ $technicalSkill->id }}"
-                                class="border border-teal-400 focus:border-teal-500 focus:outline-none font-normal px-3 w-20" value="{{ $technicalSkill->level }}" disabled />
+                                class="border border-teal-400 focus:border-teal-500 focus:outline-none font-normal px-3 w-20"
+                                value="{{ $technicalSkill->level }}" disabled />
                             <div class="bg-gray-300 font-bold pt-2 px-2">%</div>
                         </div>
 
-                        <button type="submit" form="updateSkillsForm" title="Update"
+                        <button title="Update" data-form-id="tech-skill-update-form{{ $technicalSkill->id }}"
+                            data-target-url="{{ route('admin.career.tech-skills.update', $technicalSkill->id) }}"
+                            data-name-input-id="skill-name{{ $technicalSkill->id }}"
+                            data-level-input-id="skill-level{{ $technicalSkill->id }}"
+                            data-errors-list="errors-list{{ $technicalSkill->id }}"
                             class="update-btn bg-teal-400 focus:outline-none hover:bg-teal-500 outline-none p-2 px-4 self-end text-lg text-white hidden">
                             <i class="fa fa-check"></i>
                         </button>
-                        <button title="Edit" data-name-input-id="skill-name{{ $technicalSkill->id }}" data-level-input-id="skill-level{{ $technicalSkill->id }}"
+                        <button title="Edit" data-name-input-id="skill-name{{ $technicalSkill->id }}"
+                            data-level-input-id="skill-level{{ $technicalSkill->id }}"
                             class="edit-btn bg-yellow-600 focus:outline-none hover:bg-yellow-700 outline-none p-2 px-4 self-end text-lg text-white">
                             <i class="fa fa-pencil"></i>
                         </button>
-                        <button title="Cancel" data-name-input-id="skill-name{{ $technicalSkill->id }}" data-level-input-id="skill-level{{ $technicalSkill->id }}"
+                        <button title="Cancel" data-name-input-id="skill-name{{ $technicalSkill->id }}"
+                            data-level-input-id="skill-level{{ $technicalSkill->id }}"
                             class="cancel-btn bg-yellow-600 focus:outline-none hover:bg-yellow-700 outline-none p-2 px-4 self-end text-lg text-white hidden">
                             <i class="fa fa-times"></i>
                         </button>

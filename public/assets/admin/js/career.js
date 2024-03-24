@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
     /*
      * For toggling hidden class on end date field academics page
      */
@@ -19,7 +19,6 @@ $(document).ready(function() {
             $("#edit_end_date_wrapper").show();
         }
     });
-
 
     /*
      * Show hide modals by default
@@ -43,7 +42,6 @@ $(document).ready(function() {
         // Hide the modal
         editExperienceModal.get(0).close();
     }
-
 
     /*
      * Show modals on add and edit
@@ -151,13 +149,19 @@ $(document).ready(function() {
         event.preventDefault();
         const $clickedButton = $(event.target);
         const $nameInputElement = $("#" + $clickedButton.data("name-input-id"));
-        const $levelInputElement = $("#" + $clickedButton.data("level-input-id"));
+        const $levelInputElement = $(
+            "#" + $clickedButton.data("level-input-id")
+        );
         const $updateButton = $clickedButton.prev(".update-btn");
         const $cancelButton = $clickedButton.next(".cancel-btn");
 
         // Temporarily remove content, focus, then append it back
         let currentValue = $nameInputElement.val();
-        $nameInputElement.val("").prop("disabled", false).val(currentValue).focus();
+        $nameInputElement
+            .val("")
+            .prop("disabled", false)
+            .val(currentValue)
+            .focus();
 
         currentValue = $levelInputElement.val();
         $levelInputElement.val("").prop("disabled", false).val(currentValue);
@@ -174,13 +178,19 @@ $(document).ready(function() {
         event.preventDefault();
         const $clickedButton = $(event.target);
         const $nameInputElement = $("#" + $clickedButton.data("name-input-id"));
-        const $levelInputElement = $("#" + $clickedButton.data("level-input-id"));
+        const $levelInputElement = $(
+            "#" + $clickedButton.data("level-input-id")
+        );
         const $updateButton = $clickedButton.siblings(".update-btn");
         const $editButton = $clickedButton.siblings(".edit-btn");
 
         // Temporarily remove content, focus, then append it back
         let currentValue = $nameInputElement.val();
-        $nameInputElement.val("").prop("disabled", true).val(currentValue).focus();
+        $nameInputElement
+            .val("")
+            .prop("disabled", true)
+            .val(currentValue)
+            .focus();
 
         currentValue = $levelInputElement.val();
         $levelInputElement.val("").prop("disabled", true).val(currentValue);
@@ -188,5 +198,72 @@ $(document).ready(function() {
         $clickedButton.hide();
         $updateButton.hide();
         $editButton.show();
+    });
+
+    /*
+     * Update Technical Skill
+     */
+    $(".update-btn").click((event) => {
+        event.preventDefault();
+        const $clickedButton = $(event.target);
+        const $nameInputElement = $("#" + $clickedButton.data("name-input-id"));
+        const $levelInputElement = $(
+            "#" + $clickedButton.data("level-input-id")
+        );
+        const $errorsList = $("#" + $clickedButton.data("errors-list"));
+        const $formElement = $("#" + $clickedButton.data("form-id"));
+        const $editButton = $clickedButton.siblings(".edit-btn");
+        const $cancelButton = $clickedButton.siblings(".cancel-btn");
+
+        $nameInputElement.addClass("loading");
+        $levelInputElement.addClass("loading");
+
+        // Perform form submission through AJAX
+        const formData = new FormData($formElement[0]);
+        const formAction = $formElement[0].action;
+
+        axios
+            .post(formAction, formData)
+            .then((response) => {
+                // Successful request
+                $nameInputElement.removeClass("loading").prop("disabled", true);
+                $levelInputElement
+                    .removeClass("loading")
+                    .prop("disabled", true);
+                $errorsList.hide();
+                $editButton.show();
+                $cancelButton.hide();
+                $clickedButton.hide();
+            })
+            .catch((error) => {
+                if (error.request.status === 400) {
+                    // Validation error
+                    console.log("Its a validation error");
+
+                    const $errorsObject = JSON.parse(
+                        error.response.data.errors
+                    );
+
+                    const keys = Object.keys($errorsObject);
+
+                    let listItems = "";
+                    keys.forEach((elementName) => {
+                        const errors = $errorsObject[elementName];
+                        errors.forEach((error) => {
+                            listItems += `<li>${error}</li>`;
+                        });
+                    });
+
+                    $errorsList.append(listItems);
+
+                    $nameInputElement.removeClass("loading");
+                    $levelInputElement.removeClass("loading");
+
+                    $errorsList.show();
+                } else {
+                    // Another error
+                    console.log("Error: ", error);
+                }
+            });
     });
 });
