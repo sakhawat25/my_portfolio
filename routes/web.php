@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectsController;
 use App\Http\Controllers\WebHomeController;
-use App\Models\TechnicalSkill;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,7 +76,9 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
         // Technical skills routes
         Route::prefix('tech-skills')->group(function () {
+            Route::post('/', 'storeTechSkill')->name('admin.career.tech-skills.store');
             Route::put('/{technicalSkill}/update', 'updateTechSkill')->name('admin.career.tech-skills.update');
+            Route::delete('/{technicalSkill}/delete', 'deleteTechSkill')->name('admin.career.tech-skills.delete');
         });
     });
 

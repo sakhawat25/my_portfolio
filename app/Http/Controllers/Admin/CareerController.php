@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreExperienceRequest;
+use App\Http\Requests\StoreTechRequest;
 use App\Http\Requests\UpdateExperienceRequest;
 use App\Models\Experience;
 use App\Models\TechnicalSkill;
@@ -149,5 +150,27 @@ class CareerController extends Controller
         ];
 
         return response()->json($response);
+    }
+
+    /*
+     * For deleting technical skill
+     */
+    public function deleteTechSkill(TechnicalSkill $technicalSkill)
+    {
+        $technicalSkill->delete();
+
+        return redirect()->route('admin.career')->with('message', 'Record deleted successfully!');
+    }
+
+    /*
+     * For storing education redord
+     */
+    public function storeTechSkill(StoreTechRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        TechnicalSkill::create($validatedData);
+
+        return back()->with('message', 'Technical skill record added successfully!');
     }
 }

@@ -43,6 +43,16 @@ $(document).ready(function () {
         editExperienceModal.get(0).close();
     }
 
+    const addTechModal = $("#addTechModal");
+    const showAddTechModal = addTechModal.attr("data-show-modal");
+    if (showAddTechModal) {
+        // Show the modal
+        addTechModal.get(0).showModal();
+    } else {
+        // Hide the modal
+        addTechModal.get(0).close();
+    }
+
     /*
      * Show modals on add and edit
      */
@@ -265,5 +275,24 @@ $(document).ready(function () {
                     console.log("Error: ", error);
                 }
             });
+    });
+
+    /*
+     * Confirm delete
+     */
+    $(".delete-tech-btn").click((event) => {
+        event.preventDefault(); // Prevent default form submission
+
+        const confirmation = confirm("Are you sure?"); // Display confirmation dialog
+        if (confirmation) {
+            $(event.target).prop('form').submit(); // Submit the form if user confirms
+        }
+    });
+
+    /*
+     * Show add tech skill modal
+     */
+    $("#addTechBtn").on("click", function () {
+        $("#addTechModal").get(0).showModal();
     });
 });
