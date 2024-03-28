@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UsersSeeder extends Seeder
 {
@@ -17,7 +16,7 @@ class UsersSeeder extends Seeder
             'first_name' => 'Sakhawat',
             'last_name' => 'Hussain',
             'email' => 'sakhawathussainkaka@gmail.com',
-            'image' => 'profile_pic01.jpg',
+            'image' => 'profile_pic.png',
             'password' => bcrypt('Alaska@55'),
             'cv_image' => 'no-image.jpg',
         ]);

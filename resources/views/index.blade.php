@@ -1,3 +1,7 @@
+@php
+    $titlesArray =  explode(', ', $user->titles);
+@endphp
+
 <!DOCTYPE html>
 <html lang="eng">
 
@@ -94,15 +98,27 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 valign">
-                    <a href="#0" class="logo icon-img-60">
-                        <img src="{{ asset('assets/admin/img/logo02.png') }}" alt="">
+                    <a href="{{ route('homepage') }}" class="logo icon-img-60">
+                        <span class="fs-4 fw-bold">Sakhawat.</span>
                     </a>
                 </div>
                 <div class="col-md-4 valign">
                     <div class="social text-center full-width">
-                        <a href="#0"><i class="fab fa-github"></i></a>
-                        <a href="#0"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#0"><i class="fab fa-twitter"></i></a>
+                        @if ($user->github_link)
+                            <a href="#0"><i class="fab fa-github"></i></a>
+                        @endif
+
+                        @if ($user->linkedin_link)
+                            <a href="#0"><i class="fab fa-linkedin-in"></i></a>
+                        @endif
+
+                        @if ($user->twitter_link)
+                            <a href="#0"><i class="fab fa-twitter"></i></a>
+                        @endif
+
+                        @if ($user->facebook_link)
+                            <a href="#0"><i class="fab fa-facebook"></i></a>
+                        @endif
                     </div>
                 </div>
                 <div class="col-md-4 valign">
@@ -131,7 +147,7 @@
                     <div class="cont valign">
                         <div class="full-width">
                             <div class="img">
-                                <img src="{{ asset('assets/imgs/header/profile.jpg') }}" alt="">
+                                <img src="{{ asset('images/' . $user->image) }}" alt="">
                                 <span class="icon">
                                     <img src="{{ asset('assets/imgs/header/icon1.png') }}" alt="">
                                 </span>
@@ -144,36 +160,41 @@
                             </div>
                             <div class="info text-center mt-30">
                                 <h5>{{ $user->first_name }} {{ $user->last_name }}</h5>
-                                <p class="fz-13 text-u">{{ $user->titles }}</p>
                             </div>
                             <div class="social text-center mt-20">
-                                <a href="#0"><i class="fab fa-github"></i></a>
-                                <a href="#0"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#0"><i class="fab fa-twitter"></i></a>
+                                @if ($user->github_link)
+                                    <a href="{{ $user->github_link }}"><i class="fab fa-github"></i></a>
+                                @endif
+
+                                @if ($user->linkedin_link)
+                                    <a href="{{ $user->linkedin_link }}"><i class="fab fa-linkedin-in"></i></a>
+                                @endif
+
+                                @if ($user->twitter_link)
+                                    <a href="{{ $user->twitter_link }}"><i class="fab fa-twitter"></i></a>
+                                @endif
+
+                                @if ($user->facebook_link)
+                                    <a href="{{ $user->facebook_link }}"><i class="fab fa-facebook"></i></a>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-8 content main-bg">
-                    <h1>Hello, I’m <span class="main-color">Pablo Gavi</span>, Front-end Developer
-                        and <span class="bord">UX / UI Designer <i></i></span> Based in California.</h1>
+                    <h1>Hello, I’m <span class="main-color">{{ $user->first_name }} {{ $user->last_name }}</span>, {{ $titlesArray[0] }}
+                        and <span class="bord">{{ $titlesArray[1] }} <i></i></span> Based in {{ $user->country }}.</h1>
                     <div class="stauts mt-80">
                         <div class="d-flex align-items-center">
                             <div class="mr-40">
                                 <div class="d-flex align-items-center">
-                                    <h2>14</h2>
+                                    <h2>2</h2>
                                     <p>Years <br> of Experance</p>
-                                </div>
-                            </div>
-                            <div class="mr-40">
-                                <div class="d-flex align-items-center">
-                                    <h2>6k</h2>
-                                    <p>Clients <br> Worldwide</p>
                                 </div>
                             </div>
                             <div>
                                 <div class="butn-presv">
-                                    <a href="#0" class="butn butn-md butn-bord radius-5 skew">
+                                    <a href="{{ url('files/' . $user->cv) }}" class="butn butn-md butn-bord radius-5 skew">
                                         <span>Dwonload C.V</span>
                                     </a>
                                 </div>
@@ -1140,4 +1161,5 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
 </body>
+
 </html>
