@@ -1,5 +1,14 @@
 @php
-    $titlesArray =  explode(', ', $user->titles);
+    $titlesArray = explode(', ', $user->titles);
+    $lastTitle = array_pop($titlesArray); // Remove the last element
+
+    $titlesString = implode(', ', $titlesArray); // Join elements with comma
+
+    if (!empty($titlesString)) {
+        $titlesString .= ' and '; // Add 'and' before the last element if there are more than one
+    }
+
+    $titlesString .= $lastTitle; // Append the last title
 @endphp
 
 <!DOCTYPE html>
@@ -182,8 +191,7 @@
                     </div>
                 </div>
                 <div class="col-lg-8 content main-bg">
-                    <h1>Hello, I’m <span class="main-color">{{ $user->first_name }} {{ $user->last_name }}</span>, {{ $titlesArray[0] }}
-                        and <span class="bord">{{ $titlesArray[1] }} <i></i></span> Based in {{ $user->country }}.</h1>
+                    <h1>Hello, I’m <span class="main-color">{{ $user->first_name }} {{ $user->last_name }}</span>, <span class="bord">{{ $titlesString }}<i></i></span> Based in {{ $user->country }}.</h1>
                     <div class="stauts mt-80">
                         <div class="d-flex align-items-center">
                             <div class="mr-40">
@@ -312,139 +320,60 @@
                     <div class="col-lg-4 valign">
                         <div class="sec-head md-mb80 wow fadeIn">
                             <h6 class="sub-title opacity-7 mb-15">Our Skills</h6>
-                            <h3><span class="main-color">Awards</span> & Recognitions</h3>
+                            <h3><span class="main-color">Technical Skills</span> & Achievements</h3>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="item mb-30">
-                                    <div class="d-flex align-items-center mb-30">
-                                        <div class="mr-30">
-                                            <div class="img icon-img-40">
-                                                <img src="{{ asset('assets/imgs/resume/s1.png') }}" alt="">
+                            @foreach ($technicalSkills as $technicalSkill)
+                                <div class="col-md-6">
+                                    <div class="item mb-30">
+                                        <div class="d-flex align-items-center mb-30">
+                                            <div class="mr-30">
+                                                <div class="img icon-img-40">
+                                                    {{-- <img src="{{ asset('assets/imgs/resume/s1.png') }}" alt=""> --}}
+                                                    <i class="fa fa-cogs"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h6 class="fz-18">{{ $technicalSkill->name }}</h6>
                                             </div>
                                         </div>
-                                        <div>
-                                            <h6 class="fz-18">UI / UX Design</h6>
+                                        <div class="skill-progress">
+                                            <span class="progres" data-value="{{ $technicalSkill->level }}%"></span>
                                         </div>
+                                        <span class="value">{{ $technicalSkill->level }}%</span>
                                     </div>
-                                    <div class="skill-progress">
-                                        <span class="progres" data-value="95%"></span>
-                                    </div>
-                                    <span class="value">95%</span>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="item mb-30">
-                                    <div class="d-flex align-items-center mb-30">
-                                        <div class="mr-30">
-                                            <div class="img icon-img-40">
-                                                <img src="{{ asset('assets/imgs/resume/s2.png') }}" alt="">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h6 class="fz-18">Development</h6>
-                                        </div>
-                                    </div>
-                                    <div class="skill-progress">
-                                        <span class="progres" data-value="90%"></span>
-                                    </div>
-                                    <span class="value">90%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="item sm-mb30">
-                                    <div class="d-flex align-items-center mb-30">
-                                        <div class="mr-30">
-                                            <div class="img icon-img-40">
-                                                <img src="{{ asset('assets/imgs/resume/s3.png') }}" alt="">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h6 class="fz-18">Graphic Design</h6>
-                                        </div>
-                                    </div>
-                                    <div class="skill-progress">
-                                        <span class="progres" data-value="85%"></span>
-                                    </div>
-                                    <span class="value">85%</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="item">
-                                    <div class="d-flex align-items-center mb-30">
-                                        <div class="mr-30">
-                                            <div class="img icon-img-40">
-                                                <img src="{{ asset('assets/imgs/resume/s4.png') }}" alt="">
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h6 class="fz-18">WordPress</h6>
-                                        </div>
-                                    </div>
-                                    <div class="skill-progress">
-                                        <span class="progres" data-value="78%"></span>
-                                    </div>
-                                    <span class="value">78%</span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
                 <div class="awards mt-100">
                     <div class="row md-marg">
-                        <div class="col-lg-4">
-                            <div class="award-item sub-bg md-mb30 wow fadeInUp" data-wow-delay=".2s">
-                                <div class="d-flex">
-                                    <div>
-                                        <span>01</span>
+                        @foreach ($certificates as $certificate)
+                            @php
+                                $month = \Carbon\Carbon::parse($certificate->issue_date)->month;
+                                $year = \Carbon\Carbon::parse($certificate->issue_date)->year;
+                            @endphp
+                            <div class="col-lg-4">
+                                <div class="award-item sub-bg md-mb30 wow fadeInUp" data-wow-delay=".2s">
+                                    <div class="d-flex">
+                                        <div>
+                                            <span>{{ $month }}</span>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <span>{{ $year }}</span>
+                                        </div>
                                     </div>
-                                    <div class="ml-auto">
-                                        <span>2019</span>
+                                    <div class="fw-900 h4 mb-30 mt-80">
+                                        {{ $certificate->provider }}
                                     </div>
+                                    <h6>{{ $certificate->title }}</h6>
+                                    <span class="sub-title main-color mt-10">{!! Str::limit($certificate->description, 100, '...') !!}</span>
                                 </div>
-                                <div class="img icon-img-100 mt-80 mb-30">
-                                    <img src="{{ asset('assets/imgs/awards/1.png') }}" alt="">
-                                </div>
-                                <h6>02x Designer Award</h6>
-                                <span class="sub-title main-color mt-10">Nominee</span>
                             </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="award-item sub-bg md-mb30 wow fadeInUp" data-wow-delay=".4s">
-                                <div class="d-flex">
-                                    <div>
-                                        <span>01</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span>2021</span>
-                                    </div>
-                                </div>
-                                <div class="img icon-img-100 mt-80 mb-30">
-                                    <img src="{{ asset('assets/imgs/awards/2.png') }}" alt="">
-                                </div>
-                                <h6>02x Designer Award</h6>
-                                <span class="sub-title main-color mt-10">Winner</span>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="award-item sub-bg wow fadeInUp" data-wow-delay=".6s">
-                                <div class="d-flex">
-                                    <div>
-                                        <span>01</span>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <span>2022</span>
-                                    </div>
-                                </div>
-                                <div class="img icon-img-100 mt-80 mb-30">
-                                    <img src="{{ asset('assets/imgs/awards/3.png') }}" alt="">
-                                </div>
-                                <h6>02x Designer Award</h6>
-                                <span class="sub-title main-color mt-10">Ruuners Up</span>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -479,18 +408,18 @@
                 </div>
                 <div class="gallery">
                     <div class="row">
+                        @foreach ($projects as $project)
                         <div class="col-lg-6 items">
                             <div class="item mt-50 wow fadeInUp" data-wow-delay=".2s">
                                 <div class="img">
                                     <a href="project-details.html">
-                                        <img src="assets/imgs/works/1.jpg" alt="">
+                                        <img src="{{ asset('images/' . $project->image) }}" alt="{{ $project->title }}">
                                     </a>
                                 </div>
                                 <div class="cont mt-30 d-flex align-items-center">
                                     <div>
-                                        <span class="tag">Branding</span>
-                                        <h6 class="line-height-1"><a href="project-details.html">GeekFolio
-                                                Portfolio</a>
+                                        <span class="tag">{{ $project->category }}</span>
+                                        <h6 class="line-height-1"><a href="project-details.html">{{ $project->title }}</a>
                                         </h6>
                                     </div>
                                     <div class="ml-auto">
@@ -513,105 +442,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 items">
-                            <div class="item mt-50 wow fadeInUp" data-wow-delay=".4s">
-                                <div class="img">
-                                    <a href="project-details.html">
-                                        <img src="assets/imgs/works/2.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="cont mt-30 d-flex align-items-center">
-                                    <div>
-                                        <span class="tag">Branding</span>
-                                        <h6 class="line-height-1"><a href="project-details.html">Luxury Modern
-                                                Website</a>
-                                        </h6>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="arrow">
-                                            <a href="project-details.html">
-                                                <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                    viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                    style="stroke-width: 2;">
-                                                    <line x1="0" y1="16" x2="33"
-                                                        y2="16"></line>
-                                                    <line x1="17.3" y1="0.7" x2="33.2"
-                                                        y2="16.5"></line>
-                                                    <line x1="17.3" y1="31.6" x2="33.5"
-                                                        y2="15.4"></line>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 items">
-                            <div class="item mt-50 wow fadeInUp" data-wow-delay=".6s">
-                                <div class="img">
-                                    <a href="project-details.html">
-                                        <img src="assets/imgs/works/3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="cont mt-30 d-flex align-items-center">
-                                    <div>
-                                        <span class="tag">Branding</span>
-                                        <h6 class="line-height-1"><a href="project-details.html">Partiner BPO</a></h6>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="arrow">
-                                            <a href="project-details.html">
-                                                <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                    viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                    style="stroke-width: 2;">
-                                                    <line x1="0" y1="16" x2="33"
-                                                        y2="16"></line>
-                                                    <line x1="17.3" y1="0.7" x2="33.2"
-                                                        y2="16.5"></line>
-                                                    <line x1="17.3" y1="31.6" x2="33.5"
-                                                        y2="15.4"></line>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 items">
-                            <div class="item mt-50 wow fadeInUp" data-wow-delay=".8s">
-                                <div class="img">
-                                    <a href="project-details.html">
-                                        <img src="assets/imgs/works/4.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div class="cont mt-30 d-flex align-items-center">
-                                    <div>
-                                        <span class="tag">Branding</span>
-                                        <h6 class="line-height-1"><a href="project-details.html">From our gallery</a>
-                                        </h6>
-                                    </div>
-                                    <div class="ml-auto">
-                                        <div class="arrow">
-                                            <a href="project-details.html">
-                                                <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                                    viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                    style="stroke-width: 2;">
-                                                    <line x1="0" y1="16" x2="33"
-                                                        y2="16"></line>
-                                                    <line x1="17.3" y1="0.7" x2="33.2"
-                                                        y2="16.5"></line>
-                                                    <line x1="17.3" y1="31.6" x2="33.5"
-                                                        y2="15.4"></line>
-                                                </svg>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -939,26 +770,35 @@
                     <div class="col-lg-5">
                         <div class="sec-head md-mb80 wow fadeIn">
                             <h6 class="sub-title mb-15 opacity-7">Get In Touch</h6>
-                            <h2 class="fz-50">Let's make your brand brilliant!</h2>
-                            <p class="fz-15 mt-10">If you would like to work with us or just want to get in
-                                touch, we’d love to hear from you!</p>
+                            <h2 class="fz-50">Let's bring your project to life!</h2>
+                            <p class="fz-15 mt-10">Don't hesitate to reach out – I'm eager to hear from you!</p>
                             <div class="phone fz-30 fw-600 mt-30 underline">
-                                <a href="#0" class="main-color">+1 840 841 25 69</a>
+                                <a href="#0" class="main-color">{{ $user->mobile_number }}</a>
                             </div>
                             <ul class="rest social-text d-flex mt-60">
-                                <li class="mr-30">
-                                    <a href="#0" class="hover-this"><span class="hover-anim">Facebook</span></a>
-                                </li>
-                                <li class="mr-30">
-                                    <a href="#0" class="hover-this"><span class="hover-anim">Twitter</span></a>
-                                </li>
-                                <li class="mr-30">
-                                    <a href="#0" class="hover-this"><span class="hover-anim">LinkedIn</span></a>
-                                </li>
-                                <li>
-                                    <a href="#0" class="hover-this"><span
-                                            class="hover-anim">Instagram</span></a>
-                                </li>
+                                @if ($user->github_link)
+                                    <li class="mr-30">
+                                        <a href="{{ $user->github_link }}" class="hover-this"><span class="hover-anim">Github</span></a>
+                                    </li>
+                                @endif
+
+                                @if ($user->linkedin_link)
+                                    <li>
+                                        <a href="{{ $user->linkedin_link }}" class="hover-this"><span class="hover-anim">Linkedin</span></a>
+                                    </li>
+                                @endif
+
+                                @if ($user->facebook_link)
+                                    <li class="mr-30">
+                                        <a href="{{ $user->facebook_link }}" class="hover-this"><span class="hover-anim">Facebook</span></a>
+                                    </li>
+                                @endif
+
+                                @if ($user->twitter_link)
+                                    <li class="mr-30">
+                                        <a href="{{ $user->twitter_link }}" class="hover-this"><span class="hover-anim">Twitter</span></a>
+                                    </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -1138,9 +978,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="text-center">
-                        <p class="fz-13">© 2023 Gavi is Proudly Powered by <span class="underline main-color"><a
-                                    href="https://themeforest.net/user/ui-themez" target="_blank">Ui-ThemeZ</a></span>
-                        </p>
+                        <p class="fz-13">© 2024 All rights reserved.</p>
                     </div>
                 </div>
             </div>
