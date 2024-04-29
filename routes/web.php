@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CareerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ProjectsController;
+use App\Http\Controllers\Admin\ServicesController;
 use App\Http\Controllers\WebHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -87,4 +88,15 @@ Route::middleware('auth')->prefix('admin')->group(function () {
      */
     Route::resource('/projects', ProjectsController::class);
     Route::post('/update-status/{project}', [ProjectsController::class, 'updateStatus'])->name('projects.update-status');
+
+    /*
+     * Routes for services in admin panel
+     */
+    Route::prefix('services')->controller(ServicesController::class)->group(function () {
+        Route::get('/', 'index')->name('admin.services');
+        Route::post('/', 'store')->name('admin.services.store');
+        Route::get('/{service}', 'show')->name('admin.services.show');
+        Route::put('/{service}', 'update')->name('admin.services.update');
+        Route::delete('/{service}', 'destroy')->name('admin.services.destroy');
+    });
 });

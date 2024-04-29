@@ -399,6 +399,14 @@
                     Projects
                 </a>
                 <!-- end link -->
+
+                <!-- link -->
+                <a href="{{ route('admin.services') }}"
+                    class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500 px-3 @if (request()->route()->getName() === 'admin.services') active @endif">
+                    <i class="fad fa fa-wrench text-xs mr-2"></i>
+                    Services
+                </a>
+                <!-- end link -->
             </div>
             <!-- end sidebar content -->
         </div>
