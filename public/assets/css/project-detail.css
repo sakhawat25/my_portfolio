@@ -1,0 +1,19 @@
+.tags {
+    width: 100%;
+    margin: 5rem auto;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    justify-items: flex-start;
+    align-items: flex-start;
+}
+
+.tags .tag {
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    text-transform: uppercase;
+    background-color: #c8f31d;
+    box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 2px 10px 0px rgba(0,0,0,0.75);
+}

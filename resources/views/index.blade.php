@@ -264,50 +264,18 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="item mb-40 wow fadeIn" data-wow-delay=".2s">
-                            <span class="icon-img-70 mb-30 opacity-7">
-                                <img src="{{ asset('assets/imgs/serv-img/1.png') }}" alt="">
-                            </span>
-                            <h6 class="text-u ls1 mb-15">UI / UX Design</h6>
-                            <p>There are many variations of passages of available but to the majority have suffered but
-                                the into majority.</p>
-                            <div class="bord-color"></div>
+                    @foreach ($services as $service)
+                        <div class="col-md-6">
+                            <div class="item mb-40 wow fadeIn" data-wow-delay=".2s">
+                                <span class="icon-img-70 mb-30 opacity-7">
+                                    <img src="{{ asset('images/' . $service->logo) }}" alt="{{ $service->title }}">
+                                </span>
+                                <h6 class="text-u ls1 mb-15">{{ $service->title }}</h6>
+                                <p>{{ $service->description }}</p>
+                                <div class="bord-color"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="item mb-40 wow fadeIn" data-wow-delay=".4s">
-                            <span class="icon-img-70 mb-30 opacity-7">
-                                <img src="{{ asset('assets/imgs/serv-img/2.png') }}" alt="">
-                            </span>
-                            <h6 class="text-u ls1 mb-15">Web Development</h6>
-                            <p>There are many variations of passages of available but to the majority have suffered but
-                                the into majority.</p>
-                            <div class="bord-color"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="item sm-mb40 wow fadeIn" data-wow-delay=".6s">
-                            <span class="icon-img-70 mb-30 opacity-7">
-                                <img src="{{ asset('assets/imgs/serv-img/3.png') }}" alt="">
-                            </span>
-                            <h6 class="text-u ls1 mb-15">SEO / Marketing</h6>
-                            <p>There are many variations of passages of available but to the majority have suffered but
-                                the into majority.</p>
-                            <div class="bord-color"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="item wow fadeIn" data-wow-delay=".8s">
-                            <span class="icon-img-70 mb-30 opacity-7">
-                                <img src="{{ asset('assets/imgs/serv-img/4.png') }}" alt="">
-                            </span>
-                            <h6 class="text-u ls1 mb-15">Technology Solution</h6>
-                            <p>There are many variations of passages of available but to the majority have suffered but
-                                the into majority.</p>
-                            <div class="bord-color"></div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <!-- ==================== End Services ==================== -->
@@ -412,19 +380,19 @@
                         <div class="col-lg-6 items">
                             <div class="item mt-50 wow fadeInUp" data-wow-delay=".2s">
                                 <div class="img">
-                                    <a href="project-details.html">
+                                    <a href="{{ route('project-detail', $project->slug) }}">
                                         <img src="{{ asset('images/' . $project->image) }}" alt="{{ $project->title }}">
                                     </a>
                                 </div>
                                 <div class="cont mt-30 d-flex align-items-center">
                                     <div>
                                         <span class="tag">{{ $project->category }}</span>
-                                        <h6 class="line-height-1"><a href="project-details.html">{{ $project->title }}</a>
+                                        <h6 class="line-height-1"><a href="{{ route('project-detail', $project->slug) }}">{{ $project->title }}</a>
                                         </h6>
                                     </div>
                                     <div class="ml-auto">
                                         <div class="arrow">
-                                            <a href="project-details.html">
+                                            <a href="{{ route('project-detail', $project->slug) }}">
                                                 <svg class="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                     viewBox="0 0 34.2 32.3" xml:space="preserve"
@@ -804,24 +772,27 @@
                     </div>
                     <div class="col-lg-7 valign">
                         <div class="full-width wow fadeIn">
-                            <form id="contact-form" method="post"
-                                action="https://ui-themez.smartinnovates.net/items/Gavi/dark/contact.php">
+                            <form id="contactus-form" action="{{ route('contact-us') }}" method="POST">
+                                @csrf
 
-                                <div class="messages"></div>
+                                <div class="messages">
+                                    <ul id="contactus-validation-list" class="list-group-item-danger">
+                                    </ul>
+                                </div>
 
                                 <div class="controls row">
 
                                     <div class="col-lg-6">
                                         <div class="form-group mb-30">
                                             <input id="form_name" type="text" name="name" placeholder="Name"
-                                                required="required">
+                                                >
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group mb-30">
                                             <input id="form_email" type="email" name="email" placeholder="Email"
-                                                required="required">
+                                                >
                                         </div>
                                     </div>
 
@@ -834,10 +805,10 @@
 
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <textarea id="form_message" name="message" placeholder="Message" rows="4" required="required"></textarea>
+                                            <textarea id="form_message" name="message" placeholder="Message" rows="4" ></textarea>
                                         </div>
                                         <div class="mt-30">
-                                            <button type="submit">
+                                            <button id="submit-contact-btn" data-form-id="contact-form">
                                                 <span class="text">Send A Message</span>
                                             </button>
                                         </div>
@@ -997,6 +968,8 @@
 
     <!-- custom scripts -->
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{ asset('assets/js/index.js') }}"></script>
 
 </body>
 

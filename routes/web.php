@@ -20,7 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WebHomeController::class, 'index'])->name('homepage');
+Route::controller(WebHomeController::class)->group(function () {
+    Route::get('/', 'index')->name('homepage');
+    Route::post('contact-us', 'contactUs')->name('contact-us');
+    Route::get('test-smtp', 'testSMTP')->name('test-smtp');
+    Route::get('project-detail/{slug}', 'showProjectDetail')->name('project-detail');
+});
 
 Route::get('login', function () {
     return view('auth.login');
