@@ -28,8 +28,8 @@
                     <p class="text-xl md:text-lg">{{ \Carbon\Carbon::parse($education->start_date)->format('M Y') }} -
                         {{ \Carbon\Carbon::parse($education->end_date)->format('M Y') ?? 'Present' }}</p>
                     <div class="flex gap-3">
-                        <button id="editEducationButton"
-                            class="outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit"
+                        <button
+                            class="editEducationButton outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit"
                             data-target-url="{{ route('admin.academics.education.show', $education->id) }}">
                             <i class="fa fa-pencil"></i>
                         </button>
@@ -84,8 +84,8 @@
                 <div class="flex align-middle justify-between">
                     <strong class="text-xl uppercase md:text-lg">{{ $certificate->title }}</strong>
                     <div class="flex gap-3">
-                        <button id="editCertificateButton"
-                            class="outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit"
+                        <button
+                            class="editCertificateButton outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit"
                             data-target-url="{{ route('admin.academics.certificate.show', $certificate->id) }}">
                             <i class="fa fa-pencil"></i>
                         </button>

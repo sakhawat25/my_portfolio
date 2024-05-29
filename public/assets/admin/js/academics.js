@@ -82,7 +82,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#editEducationButton").on("click", (event) => {
+    $(".editEducationButton").on("click", (event) => {
         const url = $(event.target).attr("data-target-url");
 
         axios
@@ -145,7 +145,7 @@ $(document).ready(function () {
             });
     });
 
-    $("#editCertificateButton").on("click", (event) => {
+    $(".editCertificateButton").on("click", (event) => {
         const url = $(event.target).attr("data-target-url");
 
         axios

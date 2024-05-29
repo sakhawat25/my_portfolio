@@ -69,7 +69,7 @@ $(document).ready(function () {
         });
     });
 
-    $("#editExperienceButton").on("click", (event) => {
+    $(".editExperienceButton").on("click", (event) => {
         const url = $(event.target).attr("data-target-url");
 
         axios

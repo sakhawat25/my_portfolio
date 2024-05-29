@@ -27,8 +27,8 @@
                 <div class="flex align-middle justify-between">
                     <strong class="text-xl uppercase md:text-lg">{{ $experience->position }}</strong>
                     <div class="flex gap-3">
-                        <button id="editExperienceButton"
-                            class="outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit"
+                        <button
+                            class="editExperienceButton outline-none text-teal-400 hover:text-teal-500 focus:outline-none" title="Edit"
                             data-target-url="{{ route('admin.career.experience.show', $experience->id) }}">
                             <i class="fa fa-pencil"></i>
                         </button>
